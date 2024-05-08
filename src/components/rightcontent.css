@@ -1,0 +1,29 @@
+.rightContent{
+    background-color: #ffCC00;
+    width: 35%;
+    overflow-y: auto;
+}
+
+.multiplier-containter{
+    display: flex;
+    justify-content: space-around;
+    height: 12%;
+    /* background-color: red; */
+    background-color: #ffCC00;
+    align-items: center;
+    margin-bottom: 2%;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+.upgrades-containter{
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Wyśrodkowanie w pionie */
+    align-items: center; /* Wyśrodkowanie w poziomie */
+}
+
+.upgrades-containter > * + * {
+    margin-top: 1%; /* Ustawia przerwę między elementami */
+}

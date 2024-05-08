@@ -1,0 +1,8 @@
+.button-image{
+    display: flex;
+    width: 100%;
+    background-color: #FFCC00;
+    border: 0.5vh solid white;
+    border-radius: 15%;
+    cursor: pointer;
+}

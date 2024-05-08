@@ -1,0 +1,41 @@
+.leftContent{
+    background-color: #252432;
+    width: 65%;
+    display: flex;
+}
+
+.utility-buttons-containter{
+    display: flex;
+    flex-direction: column;
+    padding: 3%;
+    width: 5%;
+}
+
+.utility-buttons-containter > * + *{
+    margin-top: 10% ;
+    
+}
+
+.clicker-button-containter{
+    width: 95%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center; 
+}
+
+.clicker-button{
+    background-color: transparent;
+    border: 0px;
+    cursor: pointer;
+
+}
+
+.clicker-image{
+    max-width: 80%;
+}
+
+.score-counter {
+    color:white;
+    
+}
