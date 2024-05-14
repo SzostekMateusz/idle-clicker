@@ -1,11 +1,15 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import './leftcontent.css';
 import UtilityBtn from './ui/UtilityBtn';
 import logo from '../assets/golden_billet.png'
 import backgroundMusic from '../assets/background_music.mp3'
 import MusicBtn from './ui/musicBtn';
 
+import { useUpgrade  } from '../context/UpgradeContext';
+
 const LeftContent = () => {
+
+    const { count, handleClick } = useUpgrade();
 
     const [isMuted, setIsMuted] = useState(false);
     const [audio] = useState(new Audio(backgroundMusic));
@@ -50,8 +54,8 @@ const LeftContent = () => {
                 <MusicBtn image='speaker_muted' onClick={mute} />
             </div>
             <div className='clicker-button-containter'>
-                <span className='score-counter'>COUNTER</span>
-                <button className='clicker-button'>
+                <span className='score-counter'>{count} $</span>
+                <button className='clicker-button' onClick={handleClick}>
                     <img src={logo} alt="Logo" className='clicker-image'/>
                 </button>
             </div>

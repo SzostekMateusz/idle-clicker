@@ -1,7 +1,7 @@
  import './upgradebox.css';
  import images from '../../imageImport.js'
 
-const UpgradeBox = ({ title, upgradePrice, image }) => {
+const UpgradeBox = ({ title, upgradePrice, image, onClick }) => {
   const selectedImage = images[image];
 
     return (
@@ -13,7 +13,7 @@ const UpgradeBox = ({ title, upgradePrice, image }) => {
             <h2>{title}</h2>
             <div className="cont-smt">
               <div className="progress-bar"></div>
-              <button id="upgrade-button" onClick="">Upgrade {upgradePrice}$</button>
+              <button id="upgrade-button" onClick={onClick}>Upgrade {upgradePrice}$</button>
             </div>
           </div>
         </div>
