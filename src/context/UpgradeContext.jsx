@@ -8,6 +8,7 @@ export const UpgradeProvider = ({ children }) => {
   const [clicked, setClicked] = useState(false);
   const [count, setCount] = useState(0);
   const [multiplier, setMultiplier] = useState(1);
+  const [addOneLevel, setAddOneLevel] = useState(0);
 
   const handleClick = () => {
     setCount(count + multiplier);
@@ -25,6 +26,7 @@ export const UpgradeProvider = ({ children }) => {
     const reqCoins = multiplier * 10;
     if (count >= reqCoins) {
       setMultiplier((prevMultiplier) => prevMultiplier + 1);
+      setAddOneLevel((prevAddOneLevel) => prevAddOneLevel + 1);
       setCount(count - reqCoins);
     } else {
       alert("Not enough credits. You need " + reqCoins + " coins.");
@@ -32,7 +34,7 @@ export const UpgradeProvider = ({ children }) => {
   };
 
   return (
-    <UpgradeContext.Provider value={{ clicked, count, multiplier, handleClick, increaseValue, addOne }}>
+    <UpgradeContext.Provider value={{ clicked, count, multiplier, handleClick, increaseValue, addOne, addOneLevel}}>
       {children}
     </UpgradeContext.Provider>
   );

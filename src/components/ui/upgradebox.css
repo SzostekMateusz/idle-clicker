@@ -12,9 +12,9 @@
 }
 
 .upgrade-box-left{
-    background-color: black;
+    position: relative;
     width: 25%;
-
+    background-color: black;
 }
 
 .asset-image{
@@ -24,10 +24,25 @@
     margin-top: 10%;
 }
 
+.upgrade-level{
+    position: absolute;
+    bottom: 5px;
+    left: 5px;
+    color: white;
+    padding: 5px;
+    font-size: 1vw;
+}
+
 .upgrade-box-right{
     width: 75%;
     height: 100%;
     margin: 3%;
+}
+
+.upgrade-title{
+    font-size: 1.1vw;
+    font-weight: bold;
+    padding-bottom: 2%;
 }
 
 .cont-smt{
