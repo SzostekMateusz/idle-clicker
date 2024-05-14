@@ -30,6 +30,10 @@
     cursor: pointer;
 
 }
+.clicker-button.clicked img {
+    transform: scale(0.9); /* Skalowanie obrazka */
+    transition: transform 0.02s ease;
+  }
 
 .clicker-image{
     max-width: 80%;
