@@ -1,4 +1,14 @@
-.news{
-    background-color: #404040;
-    height: 15%;
+.news-container {
+  display: flex;
+  align-items: center;
+  background-color: #404040;
+  height: 15%;
+}
+
+.news {
+  color: white;
+  font-size: 1vw;
+  text-align: center;
+  line-height: 1.4;
+  padding: 0% 10% 0% 10%;
 }
