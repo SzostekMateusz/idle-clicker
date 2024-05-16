@@ -2,13 +2,12 @@ import React from 'react';
 import './rightcontent.css'
 import MultiplierBtn from './ui/MultiplierBtn';
 import UpgradeBox from './ui/UpgradeBox';
-import UtilityBtn from './ui/UtilityBtn';
 
 import { useUpgrade  } from '../context/UpgradeContext';
 
 const RightContent = () => {
-
     const { addOne, addOneLevel } = useUpgrade();
+    
     return (
         <div className='rightContent'>
             <div className='multiplier-containter'>

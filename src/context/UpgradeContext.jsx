@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from "react";
 
 const UpgradeContext = createContext();
 
@@ -27,14 +27,24 @@ export const UpgradeProvider = ({ children }) => {
     if (count >= reqCoins) {
       setMultiplier((prevMultiplier) => prevMultiplier + 1);
       setAddOneLevel((prevAddOneLevel) => prevAddOneLevel + 1);
-      setCount(count - reqCoins);
+      setCount((prevCount) => prevCount - reqCoins);
     } else {
-      alert("Not enough credits. You need " + reqCoins + " coins.");
+      alert(`Not enough credits. You need ${reqCoins} coins.`);
     }
   };
 
   return (
-    <UpgradeContext.Provider value={{ clicked, count, multiplier, handleClick, increaseValue, addOne, addOneLevel}}>
+    <UpgradeContext.Provider
+      value={{
+        clicked,
+        count,
+        multiplier,
+        handleClick,
+        increaseValue,
+        addOne,
+        addOneLevel,
+      }}
+    >
       {children}
     </UpgradeContext.Provider>
   );
