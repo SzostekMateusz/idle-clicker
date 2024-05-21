@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, { createContext, useContext, useEffect, useState, useRef } from "react";
 
 const UpgradeContext = createContext();
 
@@ -9,6 +9,7 @@ export const UpgradeProvider = ({ children }) => {
   const [count, setCount] = useState(0);
   const [multiplier, setMultiplier] = useState(1);
   const [addOneLevel, setAddOneLevel] = useState(0);
+  const [addOneUpgradeCost, setAddOneUpgradeCost] = useState(10)
 
   const handleClick = () => {
     setCount(count + multiplier);
@@ -22,16 +23,59 @@ export const UpgradeProvider = ({ children }) => {
     setMultiplier((prevMultiplier) => prevMultiplier + amount);
   };
 
+  // Mouse clicking upgrade 
   const addOne = () => {
     const reqCoins = multiplier * 10;
-    if (count >= reqCoins) {
+    if (count >= addOneUpgradeCost) {
       setMultiplier((prevMultiplier) => prevMultiplier + 1);
       setAddOneLevel((prevAddOneLevel) => prevAddOneLevel + 1);
-      setCount((prevCount) => prevCount - reqCoins);
+      setCount((prevCount) => prevCount - addOneUpgradeCost);
+      setAddOneUpgradeCost(prevAddOneUpgradeCost => prevAddOneUpgradeCost + reqCoins)
     } else {
-      alert(`Not enough credits. You need ${reqCoins} coins.`);
+      alert(`Not enough credits. You need ${addOneUpgradeCost} coins.`);
     }
   };
+
+  // Passive income upgrade
+  const [intervalId, setIntervalId] = useState(null)
+  const [passiveIncomeCounter, setPassiveIncomeCounter] = useState(0)
+  const [passiveIncomeLevel, setPassiveIncomeLevel] = useState(0)
+  const [passiveIncomeUpgradeCost, setPassiveIncomeUpgradeCost] = useState(5)
+
+
+  
+
+  const passiveIncomeCounterRef = useRef(passiveIncomeCounter);
+
+  useEffect(() => {
+    passiveIncomeCounterRef.current = passiveIncomeCounter;
+  }, [passiveIncomeCounter]);
+
+  useEffect(() => {
+    return () => {
+      if (intervalId) {
+        clearInterval(intervalId);
+      }
+    };
+  }, [intervalId]);
+
+  const passiveIncomeUpgrade = () => {
+    if (count >= passiveIncomeUpgradeCost) {
+      setCount(prevCount => prevCount - passiveIncomeUpgradeCost);
+      setPassiveIncomeCounter(prevCounter => prevCounter + 2);
+      setPassiveIncomeUpgradeCost(prevCost => prevCost * 2);
+      setPassiveIncomeLevel(prevLevel => prevLevel + 1);
+
+      const newIntervalId = setInterval(() => {
+        setCount(prevCount => prevCount + passiveIncomeCounterRef.current);
+      }, 2000);
+      setIntervalId(newIntervalId);
+      
+    } else {
+      alert(`Not enough credits. You need ${passiveIncomeUpgradeCost} coins.`);
+    }
+  };
+
 
   return (
     <UpgradeContext.Provider
@@ -43,6 +87,10 @@ export const UpgradeProvider = ({ children }) => {
         increaseValue,
         addOne,
         addOneLevel,
+        addOneUpgradeCost,
+        passiveIncomeUpgrade,
+        passiveIncomeLevel,
+        passiveIncomeUpgradeCost
       }}
     >
       {children}

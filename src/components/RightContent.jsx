@@ -6,8 +6,9 @@ import UpgradeBox from './ui/UpgradeBox';
 import { useUpgrade  } from '../context/UpgradeContext';
 
 const RightContent = () => {
-    const { addOne, addOneLevel } = useUpgrade();
-    
+    const { addOne, addOneLevel, passiveIncomeUpgrade, passiveIncomeLevel, passiveIncomeUpgradeCost, addOneUpgradeCost } = useUpgrade();
+
+
     return (
         <div className='rightContent'>
             <div className='multiplier-containter'>
@@ -17,9 +18,8 @@ const RightContent = () => {
                 <MultiplierBtn multiplier={25} />
             </div>
             <div className='upgrades-containter'>
-                <UpgradeBox title='Coin' upgradePrice={10} image='coin' onClick={addOne} upgradeLevel={addOneLevel}/>
-                <UpgradeBox title='Golden Billet' upgradePrice={100} image='golden_billet'/>
-                <UpgradeBox title='Coin' upgradePrice={10} image='coin' />
+                <UpgradeBox title='Coin' upgradePrice={addOneUpgradeCost} image='coin' onClick={addOne} upgradeLevel={addOneLevel}/>
+                <UpgradeBox title='Golden Billet' upgradePrice={passiveIncomeUpgradeCost} image='golden_billet' onClick={passiveIncomeUpgrade} upgradeLevel={passiveIncomeLevel} />
             </div> 
         </div>  
     );
