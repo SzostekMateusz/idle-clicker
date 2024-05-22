@@ -4,7 +4,6 @@ import UtilityBtn from './ui/UtilityBtn';
 import logo from '../assets/golden_billet.png';
 import backgroundMusic from '../assets/background_music.mp3';
 import MusicBtn from './ui/musicBtn';
-
 import { useUpgrade } from '../context/UpgradeContext';
 
 const LeftContent = () => {
@@ -13,7 +12,7 @@ const LeftContent = () => {
     const [isMuted, setIsMuted] = useState(false);
     const [audio] = useState(new Audio(backgroundMusic));
     const [isAudioInitialized, setIsAudioInitialized] = useState(false);
-    const [clicked, setClicked] = useState(false); // Dodajemy stan clicked
+    const [clicked, setClicked] = useState(false);
 
     useEffect(() => {
         audio.loop = true;
@@ -26,6 +25,11 @@ const LeftContent = () => {
             audio.pause();
         };
     }, [audio, isMuted, isAudioInitialized]);
+
+    //Title showing money counter
+    useEffect(() => {
+        document.title = `${titleCounterFormat(count)} $ - Money Idle Clicker`;
+    }, [count]);
 
     const toggleMute = () => {
         setIsMuted(!isMuted);
@@ -55,7 +59,11 @@ const LeftContent = () => {
 
     function counterFormat(number) {
         return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
-      }
+    }
+
+    function titleCounterFormat(number) {
+        return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
 
     return (
         <div className='leftContent'>
