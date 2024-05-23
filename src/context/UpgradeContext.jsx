@@ -10,13 +10,15 @@ export const UpgradeProvider = ({ children }) => {
   // Upgrade sound
   const audioRef = useRef(null);
 
-  // Preload dźwięku podczas montowania komponentu
   useEffect(() => {
     audioRef.current = new Audio(upgradeSoundKaching);
   }, []);
 
   const upgradeSoundEffect = () => {
+    // Zatrzymaj odtwarzanie obecnego dźwięku, jeśli jest odtwarzany
     if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0; // Przewiń do początku dźwięku
       audioRef.current.play();
     }
   };
