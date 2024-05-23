@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useState, useRef } from "react";
-import upgradeSoundKaching from '../assets/cash-register-kaching.mp3';
+import useSound from "../hooks/useSound";
 
 const UpgradeContext = createContext();
 
@@ -7,22 +7,8 @@ export const useUpgrade = () => useContext(UpgradeContext);
 
 export const UpgradeProvider = ({ children }) => {
 
-  // Upgrade sound
-  const audioRef = useRef(null);
-
-  useEffect(() => {
-    audioRef.current = new Audio(upgradeSoundKaching);
-  }, []);
-
-  const upgradeSoundEffect = () => {
-    // Zatrzymaj odtwarzanie obecnego dźwięku, jeśli jest odtwarzany
-    if (audioRef.current) {
-      audioRef.current.pause();
-      audioRef.current.currentTime = 0; // Przewiń do początku dźwięku
-      audioRef.current.play();
-    }
-  };
-
+  const upgradeSoundEffect = useSound()
+  
 // Mouse clicking upgrade
   const [clicked, setClicked] = useState(false);
   const [count, setCount] = useState(0);
