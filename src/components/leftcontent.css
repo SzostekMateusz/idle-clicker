@@ -28,7 +28,6 @@
     background-color: transparent;
     border: 0px;
     cursor: pointer;
-
 }
 .clicker-button.clicked img {
     transform: scale(0.9); /* Skalowanie obrazka */
@@ -36,11 +35,10 @@
   }
 
 .clicker-image{
-    max-width: 80%;
+    height: 60vh;
 }
 
 .score-counter {
     color:white;
-    font-size: 2rem;
-    
+    font-size: 4vh;
 }
