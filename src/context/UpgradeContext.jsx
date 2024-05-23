@@ -1,10 +1,27 @@
 import React, { createContext, useContext, useEffect, useState, useRef } from "react";
+import upgradeSoundKaching from '../assets/cash-register-kaching.mp3';
 
 const UpgradeContext = createContext();
 
 export const useUpgrade = () => useContext(UpgradeContext);
 
 export const UpgradeProvider = ({ children }) => {
+
+  // Upgrade sound
+  const audioRef = useRef(null);
+
+  // Preload dźwięku podczas montowania komponentu
+  useEffect(() => {
+    audioRef.current = new Audio(upgradeSoundKaching);
+  }, []);
+
+  const upgradeSoundEffect = () => {
+    if (audioRef.current) {
+      audioRef.current.play();
+    }
+  };
+
+// Mouse clicking upgrade
   const [clicked, setClicked] = useState(false);
   const [count, setCount] = useState(0);
   const [multiplier, setMultiplier] = useState(1);
@@ -23,7 +40,6 @@ export const UpgradeProvider = ({ children }) => {
     setMultiplier((prevMultiplier) => prevMultiplier + amount);
   };
 
-  // Mouse clicking upgrade 
   const addOne = () => {
     const reqCoins = multiplier * 10;
     if (count >= addOneUpgradeCost) {
@@ -31,6 +47,7 @@ export const UpgradeProvider = ({ children }) => {
       setAddOneLevel((prevAddOneLevel) => prevAddOneLevel + 1);
       setCount((prevCount) => prevCount - addOneUpgradeCost);
       setAddOneUpgradeCost(prevAddOneUpgradeCost => prevAddOneUpgradeCost + reqCoins)
+      upgradeSoundEffect();
     } else {
       alert(`Not enough credits. You need ${addOneUpgradeCost} coins.`);
     }
@@ -65,6 +82,7 @@ export const UpgradeProvider = ({ children }) => {
       setPassiveIncomeCounter(prevCounter => prevCounter + 2);
       setPassiveIncomeUpgradeCost(prevCost => prevCost * 2);
       setPassiveIncomeLevel(prevLevel => prevLevel + 1);
+      upgradeSoundEffect();
 
       const newIntervalId = setInterval(() => {
         setCount(prevCount => prevCount + passiveIncomeCounterRef.current);
