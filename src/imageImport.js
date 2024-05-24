@@ -4,6 +4,8 @@ import settings from '../src/assets/settings.png';
 import currency_change from '../src/assets/currency_change.png'
 import speaker from '../src/assets/speaker.png'
 import speaker_muted from '../src/assets/speaker_muted.png'
+import cash from '../src/assets/cash.png'
+import bank from '../src/assets/bank.png'
 
 const images ={
     coin,
@@ -11,7 +13,9 @@ const images ={
     settings,
     currency_change,
     speaker,
-    speaker_muted
+    speaker_muted,
+    cash,
+    bank
 }
 
 export default images;
