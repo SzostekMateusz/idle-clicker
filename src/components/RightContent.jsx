@@ -6,7 +6,19 @@ import UpgradeBox from './ui/UpgradeBox';
 import { useUpgrade  } from '../context/UpgradeContext';
 
 const RightContent = () => {
-    const { addOne, addOneLevel, passiveIncomeUpgrade, passiveIncomeLevel, passiveIncomeUpgradeCost, addOneUpgradeCost } = useUpgrade();
+    const {
+      addOne,
+      addOneLevel,
+      passiveIncomeUpgrade,
+      passiveIncomeLevel,
+      passiveIncomeUpgradeCost,
+      addOneUpgradeCost,
+      cashUpgrade,
+      cashUpgradeCost,
+      cashUpgradeLevel,
+    } = useUpgrade();
+
+
 
 
     return (
@@ -20,6 +32,7 @@ const RightContent = () => {
             <div className='upgrades-containter'>
                 <UpgradeBox title='Coin' upgradePrice={addOneUpgradeCost} image='coin' onClick={addOne} upgradeLevel={addOneLevel}/>
                 <UpgradeBox title='Golden Billet' upgradePrice={passiveIncomeUpgradeCost} image='golden_billet' onClick={passiveIncomeUpgrade} upgradeLevel={passiveIncomeLevel} />
+                <UpgradeBox title='Cash' upgradePrice={cashUpgradeCost} image='cash' onClick={cashUpgrade} upgradeLevel={cashUpgradeLevel}/>
             </div> 
         </div>  
     );
