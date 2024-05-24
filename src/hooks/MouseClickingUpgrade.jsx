@@ -1,6 +1,6 @@
-// MouseClickingUpgrade.js
 import { useState } from "react";
 import useSound from "../hooks/useSound";
+import { CashIncomeUpgrade } from "./CashIncomeUpgrade";
 
 export const useMouseClickingUpgrade = () => {
   const upgradeSoundEffect = useSound();
@@ -11,8 +11,10 @@ export const useMouseClickingUpgrade = () => {
   const [addOneLevel, setAddOneLevel] = useState(0);
   const [addOneUpgradeCost, setAddOneUpgradeCost] = useState(10);
 
+  const { cashUpgrade, cashUpgradeCost, cashIncome, cashUpgradeLevel } = CashIncomeUpgrade(count, setCount);
+
   const handleClick = () => {
-    setCount(count + multiplier); 
+    setCount(count + multiplier + cashIncome); 
     setClicked(true);
     setTimeout(() => {
       setClicked(false);
@@ -46,5 +48,9 @@ export const useMouseClickingUpgrade = () => {
     addOne,
     addOneLevel,
     addOneUpgradeCost,
+    cashUpgrade,
+    cashUpgradeCost,
+    cashUpgradeLevel,
+    cashIncome,
   };
 };
