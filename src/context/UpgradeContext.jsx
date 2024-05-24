@@ -18,9 +18,9 @@ export const UpgradeProvider = ({ children }) => {
     addOne,
     addOneLevel,
     addOneUpgradeCost,
-    cashUpgrade, // Dodaj cashUpgrade do zwracanych wartości
-    cashUpgradeCost, // Dodaj cashUpgradeCost do zwracanych wartości
-    cashIncome, // Dodaj cashIncome do zwracanych wartości
+    cashUpgrade,
+    cashUpgradeCost,
+    cashIncome,
     cashUpgradeLevel
   } = useMouseClickingUpgrade();
 
@@ -30,9 +30,6 @@ export const UpgradeProvider = ({ children }) => {
     passiveIncomeUpgradeCost,
   } = usePassiveIncomeUpgrade(count, setCount);
 
-  // const {
-  //   cashUpgradeLevel,
-  // } = CashIncomeUpgrade(count, setCount);
 
   return (
     <UpgradeContext.Provider
