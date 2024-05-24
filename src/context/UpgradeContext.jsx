@@ -1,6 +1,7 @@
 import React, { createContext, useContext } from "react";
 import { useMouseClickingUpgrade } from "../hooks/MouseClickingUpgrade";
 import { usePassiveIncomeUpgrade } from "../hooks/passiveIncomeUpgrade";
+import { CashIncomeUpgrade } from "../hooks/CashIncomeUpgrade";
 
 const UpgradeContext = createContext();
 
@@ -17,6 +18,10 @@ export const UpgradeProvider = ({ children }) => {
     addOne,
     addOneLevel,
     addOneUpgradeCost,
+    cashUpgrade, // Dodaj cashUpgrade do zwracanych wartości
+    cashUpgradeCost, // Dodaj cashUpgradeCost do zwracanych wartości
+    cashIncome, // Dodaj cashIncome do zwracanych wartości
+    cashUpgradeLevel
   } = useMouseClickingUpgrade();
 
   const {
@@ -24,6 +29,10 @@ export const UpgradeProvider = ({ children }) => {
     passiveIncomeLevel,
     passiveIncomeUpgradeCost,
   } = usePassiveIncomeUpgrade(count, setCount);
+
+  // const {
+  //   cashUpgradeLevel,
+  // } = CashIncomeUpgrade(count, setCount);
 
   return (
     <UpgradeContext.Provider
@@ -39,6 +48,10 @@ export const UpgradeProvider = ({ children }) => {
         passiveIncomeUpgrade,
         passiveIncomeLevel,
         passiveIncomeUpgradeCost,
+        cashUpgrade,
+        cashUpgradeCost,
+        cashIncome,
+        cashUpgradeLevel
       }}
     >
       {children}
