@@ -22,12 +22,21 @@ export const UpgradeProvider = ({ children }) => {
     cashUpgradeCost,
     cashIncome,
     cashUpgradeLevel,
+    totalIncome,
+    setTotalIncome,
   } = useMouseClickingUpgrade();
 
-  const { passiveIncomeUpgrade, passiveIncomeLevel, passiveIncomeUpgradeCost } =
-    usePassiveIncomeUpgrade(count, setCount);
+  const {
+    passiveIncomeUpgrade,
+    passiveIncomeLevel,
+    passiveIncomeUpgradeCost,
+  } = usePassiveIncomeUpgrade(count, setCount, totalIncome, setTotalIncome);
 
-  const {passiveBankIncomeUpgrade, passiveBankLevel, passiveBankUpgradeCost} = PassiveBankIncomeUpgrade(count, setCount);
+  const {
+    passiveBankIncomeUpgrade,
+    passiveBankLevel,
+    passiveBankUpgradeCost,
+  } = PassiveBankIncomeUpgrade(count, setCount, totalIncome, setTotalIncome);
 
   return (
     <UpgradeContext.Provider
@@ -47,9 +56,10 @@ export const UpgradeProvider = ({ children }) => {
         cashUpgradeCost,
         cashIncome,
         cashUpgradeLevel,
+        totalIncome,
         passiveBankIncomeUpgrade,
         passiveBankLevel,
-        passiveBankUpgradeCost
+        passiveBankUpgradeCost,
       }}
     >
       {children}

@@ -12,11 +12,14 @@ export const useMouseClickingUpgrade = () => {
   const [multiplier, setMultiplier] = useState(1);
   const [addOneLevel, setAddOneLevel] = useState(0);
   const [addOneUpgradeCost, setAddOneUpgradeCost] = useState(10);
+  const [totalIncome, setTotalIncome] = useState(0);
 
   const { cashUpgrade, cashUpgradeCost, cashIncome, cashUpgradeLevel } = CashIncomeUpgrade(count, setCount);
 
   const handleClick = () => {
-    setCount(count + multiplier + cashIncome); 
+    const income = multiplier + cashIncome;
+    setCount(count + income);
+    setTotalIncome(totalIncome + income);
     setClicked(true);
     setTimeout(() => {
       setClicked(false);
@@ -55,5 +58,7 @@ export const useMouseClickingUpgrade = () => {
     cashUpgradeCost,
     cashUpgradeLevel,
     cashIncome,
+    totalIncome,
+    setTotalIncome
   };
 };

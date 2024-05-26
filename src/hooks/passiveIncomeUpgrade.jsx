@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import useSound from "./usePurchaceSound";
 import usePurchaceRejectSound from "./usePurchaceRejectSound";
 
-export const usePassiveIncomeUpgrade = (count, setCount) => {
+export const usePassiveIncomeUpgrade = (count, setCount, totalIncome, setTotalIncome) => {
   const upgradeSoundEffect = useSound();
   const purchaceRejectSoundEffect = usePurchaceRejectSound();
 
@@ -38,7 +38,9 @@ export const usePassiveIncomeUpgrade = (count, setCount) => {
       }
 
       const newIntervalId = setInterval(() => {
-        setCount((prevCount) => prevCount + passiveIncomeCounterRef.current);
+        const income = passiveIncomeCounterRef.current;
+        setCount((prevCount) => prevCount + income);
+        setTotalIncome((prevTotalIncome) => prevTotalIncome + income);
       }, 2000);
       setIntervalId(newIntervalId);
     } else {
@@ -46,6 +48,7 @@ export const usePassiveIncomeUpgrade = (count, setCount) => {
       alert(`Not enough credits. You need ${passiveIncomeUpgradeCost} coins.`);
     }
   };
+
 
   return {
     passiveIncomeUpgrade,
