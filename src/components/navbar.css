@@ -1,5 +1,15 @@
-.navbar{
+.navbar-container{
     background-color: #FFCC00;
     height: 3%;
-    font-size: 1vh;
+    font-size: 1.6vh;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
 }
+
+.income-section{
+    margin-left: 5%;
+    text-align: center;
+}
+
+
