@@ -1,5 +1,5 @@
 import { useState } from "react";
-import useSound from "../hooks/useSound";
+import useSound from "../hooks/usePurchaceSound";
 import { CashIncomeUpgrade } from "./CashIncomeUpgrade";
 
 export const useMouseClickingUpgrade = () => {
