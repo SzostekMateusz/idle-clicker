@@ -1,9 +1,11 @@
 import { useState } from "react";
 import useSound from "../hooks/usePurchaceSound";
+import usePurchaceRejectSound from "./usePurchaceRejectSound";
 import { CashIncomeUpgrade } from "./CashIncomeUpgrade";
 
 export const useMouseClickingUpgrade = () => {
   const upgradeSoundEffect = useSound();
+  const purchaceRejectSoundEffect = usePurchaceRejectSound();
 
   const [clicked, setClicked] = useState(false);
   const [count, setCount] = useState(0);
@@ -34,6 +36,7 @@ export const useMouseClickingUpgrade = () => {
       setAddOneUpgradeCost((prevAddOneUpgradeCost) => prevAddOneUpgradeCost + reqCoins);
       upgradeSoundEffect();
     } else {
+      purchaceRejectSoundEffect();
       alert(`Not enough credits. You need ${addOneUpgradeCost} coins.`);
     }
   };
