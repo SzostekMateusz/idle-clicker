@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import useSound from "./useSound";
+import useSound from "./usePurchaceSound";
 
 export const CashIncomeUpgrade = (count, setCount) => {
 
