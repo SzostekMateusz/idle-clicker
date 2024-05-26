@@ -12,15 +12,15 @@ function App() {
 
   return (
     <div className='app-container'>
+    <UpgradeProvider>
       <Navbar />
       <News />
-      <div className='body-container'>
-      <UpgradeProvider>
-        <LeftContent />
-        <RightContent />
-        </UpgradeProvider>
-      </div>
-    </div> 
+        <div className='body-container'>
+          <LeftContent />
+          <RightContent />
+        </div>
+      </UpgradeProvider>
+  </div> 
   )
 }
 
