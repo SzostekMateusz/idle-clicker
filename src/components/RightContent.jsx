@@ -18,7 +18,9 @@ const RightContent = () => {
       cashUpgradeLevel,
       passiveBankIncomeUpgrade,
       passiveBankLevel,
-      passiveBankUpgradeCost
+      passiveBankUpgradeCost,
+      raffle,
+      raffleCost
     } = useUpgrade();
 
 
@@ -37,6 +39,7 @@ const RightContent = () => {
                 <UpgradeBox title='Golden Billet' upgradePrice={passiveIncomeUpgradeCost} image='golden_billet' onClick={passiveIncomeUpgrade} upgradeLevel={passiveIncomeLevel} />
                 <UpgradeBox title='Cash' upgradePrice={cashUpgradeCost} image='cash' onClick={cashUpgrade} upgradeLevel={cashUpgradeLevel}/>
                 <UpgradeBox title='Bank Deposit' upgradePrice={passiveBankUpgradeCost} image={'bank'} onClick={passiveBankIncomeUpgrade} upgradeLevel={passiveBankLevel} />
+                <UpgradeBox title='Raffle' upgradePrice={raffleCost} image={'raffle'} onClick={raffle} upgradeLevel={'-'} />
             </div> 
         </div>  
     );
