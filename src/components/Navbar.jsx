@@ -2,10 +2,10 @@ import './navbar.css'
 import { useUpgrade } from '../context/UpgradeContext';
 
 const Navbar = () => {
-    const {totalIncome,} = useUpgrade();
+    const {totalIncome, totalMoneySpent} = useUpgrade();
 
 
-    function totalIncomeFormat(number) {
+    function counterFormat(number) {
         return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
     }
 
@@ -13,8 +13,12 @@ const Navbar = () => {
     return ( 
     <div className='navbar-container'>
         <div className='income-section'>
-            <p>Total Income: {totalIncomeFormat(totalIncome)} $</p>
-        </div>     
+            <h1>Total Income: {counterFormat(totalIncome)} $</h1>  
+        </div>
+        <div className='income-section'>
+            <h1>Money Spent: {counterFormat(totalMoneySpent)} $</h1>  
+        </div>
+        
     </div> );
 }
  

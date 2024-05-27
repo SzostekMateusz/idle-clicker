@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import useSound from "./usePurchaceSound";
 import usePurchaceRejectSound from "./usePurchaceRejectSound";
 
-export const CashIncomeUpgrade = (count, setCount) => {
+export const CashIncomeUpgrade = (count, setCount, setTotalMoneySpent) => {
 
   const UpgradeSoundEffect = useSound();
   const purchaceRejectSoundEffect = usePurchaceRejectSound();
@@ -17,6 +17,7 @@ export const CashIncomeUpgrade = (count, setCount) => {
       setCashIncome((prevCashIncome) => prevCashIncome + 10)
       setCashUpgradeLevel(prevCashUpgradeLevel => prevCashUpgradeLevel + 1)
       setCashUpgradeCost((prevCashUpgradeCost) => Math.round(prevCashUpgradeCost * 1.3))
+      setTotalMoneySpent((prevTotalMoneySpent) => prevTotalMoneySpent + cashUpgradeCost)
       UpgradeSoundEffect();
     }
     else{

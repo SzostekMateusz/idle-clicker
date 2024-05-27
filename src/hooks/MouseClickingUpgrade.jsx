@@ -13,8 +13,9 @@ export const useMouseClickingUpgrade = () => {
   const [addOneLevel, setAddOneLevel] = useState(0);
   const [addOneUpgradeCost, setAddOneUpgradeCost] = useState(10);
   const [totalIncome, setTotalIncome] = useState(0);
+  const [totalMoneySpent, setTotalMoneySpent] = useState(0)
 
-  const { cashUpgrade, cashUpgradeCost, cashIncome, cashUpgradeLevel } = CashIncomeUpgrade(count, setCount);
+  const { cashUpgrade, cashUpgradeCost, cashIncome, cashUpgradeLevel } = CashIncomeUpgrade(count, setCount, setTotalMoneySpent);
 
   const handleClick = () => {
     const income = multiplier + cashIncome;
@@ -37,6 +38,7 @@ export const useMouseClickingUpgrade = () => {
       setAddOneLevel((prevAddOneLevel) => prevAddOneLevel + 1);
       setCount((prevCount) => prevCount - addOneUpgradeCost);
       setAddOneUpgradeCost((prevAddOneUpgradeCost) => prevAddOneUpgradeCost + reqCoins);
+      setTotalMoneySpent((prevTotalMoneySpent) => prevTotalMoneySpent + addOneUpgradeCost)
       upgradeSoundEffect();
     } else {
       purchaceRejectSoundEffect();
@@ -59,6 +61,8 @@ export const useMouseClickingUpgrade = () => {
     cashUpgradeLevel,
     cashIncome,
     totalIncome,
-    setTotalIncome
+    setTotalIncome,
+    totalMoneySpent,
+    setTotalMoneySpent
   };
 };

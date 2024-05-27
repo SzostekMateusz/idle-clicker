@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import useSound from "./usePurchaceSound";
 import usePurchaceRejectSound from "./usePurchaceRejectSound";
 
-export const usePassiveIncomeUpgrade = (count, setCount, totalIncome, setTotalIncome) => {
+export const usePassiveIncomeUpgrade = (count, setCount, setTotalIncome, setTotalMoneySpent) => {
   const upgradeSoundEffect = useSound();
   const purchaceRejectSoundEffect = usePurchaceRejectSound();
 
@@ -31,6 +31,7 @@ export const usePassiveIncomeUpgrade = (count, setCount, totalIncome, setTotalIn
       setPassiveIncomeCounter((prevCounter) => prevCounter + 2);
       setPassiveIncomeUpgradeCost((prevCost) => prevCost * 2);
       setPassiveIncomeLevel((prevLevel) => prevLevel + 1);
+      setTotalMoneySpent((prevTotalMoneySpent) => prevTotalMoneySpent + passiveIncomeUpgradeCost)
       upgradeSoundEffect();
 
       if (intervalId) {
