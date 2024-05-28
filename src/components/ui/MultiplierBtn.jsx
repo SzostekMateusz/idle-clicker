@@ -1,11 +1,12 @@
-import './multiplierBtn.css'
+import React from 'react';
+import './multiplierBtn.css';
 
-const MultiplierBtn = ( { multiplier } ) => {
-    return (  
-        <div className='btn-container'>
-            <button className='btn'>X{multiplier}</button>
-        </div>
-    );
+const MultiplierBtn = ({ multiplier, onClick }) => {
+  return (
+    <div className='btn-container'>
+      <button className='btn' onClick={onClick}>X{multiplier}</button>
+    </div>
+  );
 }
- 
+
 export default MultiplierBtn;
