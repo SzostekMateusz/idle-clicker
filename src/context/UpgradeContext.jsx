@@ -3,6 +3,7 @@ import { useMouseClickingUpgrade } from "../hooks/MouseClickingUpgrade";
 import { usePassiveIncomeUpgrade } from "../hooks/passiveIncomeUpgrade";
 import { PassiveBankIncomeUpgrade } from "../hooks/BankIncomeUpgrade";
 import RaffleUpgrade from "../hooks/RaffleUpgrade";
+import { usePurchaceMultiplier } from "../hooks/usePurchaceMultiplier";
 
 const UpgradeContext = createContext();
 
@@ -25,8 +26,8 @@ export const UpgradeProvider = ({ children }) => {
     cashUpgradeLevel,
     totalIncome,
     setTotalIncome,
-    totalMoneySpent, 
-    setTotalMoneySpent
+    totalMoneySpent,
+    setTotalMoneySpent,
   } = useMouseClickingUpgrade();
 
   const {
@@ -41,7 +42,14 @@ export const UpgradeProvider = ({ children }) => {
     passiveBankUpgradeCost,
   } = PassiveBankIncomeUpgrade(count, setCount, setTotalIncome, setTotalMoneySpent);
 
-  const { raffle, raffleCost } = RaffleUpgrade(count, setCount);
+  const {
+    raffle, raffleCost 
+  } = RaffleUpgrade(count, setCount);
+
+  const {
+    PurchaceMultiplierState,
+    setPurchaceMultiplierState,  
+  } = usePurchaceMultiplier();
 
   return (
     <UpgradeContext.Provider
@@ -68,7 +76,9 @@ export const UpgradeProvider = ({ children }) => {
         totalMoneySpent,
         setTotalMoneySpent,
         raffle,
-        raffleCost
+        raffleCost,
+        PurchaceMultiplierState,
+        setPurchaceMultiplierState,  
       }}
     >
       {children}
