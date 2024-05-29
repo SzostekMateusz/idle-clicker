@@ -4,14 +4,15 @@ import MultiplierBtn from "./ui/MultiplierBtn";
 import UpgradeBox from "./ui/UpgradeBox";
 import { useUpgrade } from "../context/UpgradeContext";
 
+
 const RightContent = () => {
   const {
     addOne,
     addOneLevel,
+    addOneUpgradeCost,
     passiveIncomeUpgrade,
     passiveIncomeLevel,
     passiveIncomeUpgradeCost,
-    addOneUpgradeCost,
     cashUpgrade,
     cashUpgradeCost,
     cashUpgradeLevel,
@@ -20,19 +21,10 @@ const RightContent = () => {
     passiveBankUpgradeCost,
     raffle,
     raffleCost,
-    PurchaceMultiplierState,
+    purchaceMultiplierState,
     setPurchaceMultiplierState,
+    calculateTotalCost,
   } = useUpgrade();
-
-  const calculateTotalCost = (level, multiplier) => {
-    let totalCost = 0;
-    let cost = 10 * Math.pow(2, level);
-    for (let i = 0; i < multiplier; i++) {
-      totalCost += cost;
-      cost *= 2;
-    }
-    return totalCost;
-  };
 
   return (
     <div className="rightContent">
@@ -45,38 +37,35 @@ const RightContent = () => {
       <div className="upgrades-containter">
         <UpgradeBox
           title="Coin"
-          upgradePrice={calculateTotalCost(
-            addOneLevel,
-            PurchaceMultiplierState
-          )}
+          upgradePrice={calculateTotalCost(addOneUpgradeCost, addOneLevel, purchaceMultiplierState)}
           image="coin"
           onClick={addOne}
           upgradeLevel={addOneLevel}
         />
         <UpgradeBox
           title="Golden Billet"
-          upgradePrice={passiveIncomeUpgradeCost * PurchaceMultiplierState}
+          upgradePrice={calculateTotalCost(passiveIncomeUpgradeCost, passiveIncomeLevel, purchaceMultiplierState)}
           image="golden_billet"
           onClick={passiveIncomeUpgrade}
           upgradeLevel={passiveIncomeLevel}
         />
         <UpgradeBox
           title="Cash"
-          upgradePrice={cashUpgradeCost * PurchaceMultiplierState}
+          upgradePrice={calculateTotalCost(cashUpgradeCost, cashUpgradeLevel, purchaceMultiplierState)}
           image="cash"
           onClick={cashUpgrade}
           upgradeLevel={cashUpgradeLevel}
         />
         <UpgradeBox
           title="Bank Deposit"
-          upgradePrice={passiveBankUpgradeCost * PurchaceMultiplierState}
+          upgradePrice={calculateTotalCost(passiveBankUpgradeCost, passiveBankLevel, purchaceMultiplierState)}
           image="bank"
           onClick={passiveBankIncomeUpgrade}
           upgradeLevel={passiveBankLevel}
         />
         <UpgradeBox
           title="Raffle"
-          upgradePrice={raffleCost * PurchaceMultiplierState}
+          upgradePrice={calculateTotalCost(raffleCost, 0, purchaceMultiplierState)}
           image="raffle"
           onClick={raffle}
           upgradeLevel="-"

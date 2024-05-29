@@ -1,10 +1,10 @@
 import { useState } from "react";
 
 export const usePurchaceMultiplier = () => {
-  const [PurchaceMultiplierState, setPurchaceMultiplierState] = useState(1);
+  const [purchaceMultiplierState, setPurchaceMultiplierState] = useState(1);
 
-  return {
-    PurchaceMultiplierState,
+  return { 
+    purchaceMultiplierState,
     setPurchaceMultiplierState,
   };
 };

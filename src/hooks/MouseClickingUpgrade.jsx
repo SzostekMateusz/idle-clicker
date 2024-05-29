@@ -3,11 +3,13 @@ import useSound from "../hooks/usePurchaceSound";
 import usePurchaceRejectSound from "../hooks/usePurchaceRejectSound";
 import { CashIncomeUpgrade } from "../hooks/CashIncomeUpgrade";
 import { usePurchaceMultiplier } from "../hooks/usePurchaceMultiplier";
+import { calculateTotalCost } from "../utils/calculateTotalCost";
+import { useUpgrade } from "../context/UpgradeContext";
 
 export const useMouseClickingUpgrade = () => {
   const upgradeSoundEffect = useSound();
   const purchaceRejectSoundEffect = usePurchaceRejectSound();
-  const { PurchaceMultiplierState } = usePurchaceMultiplier(); 
+  const { purchaceMultiplierState } = usePurchaceMultiplier();
   const [clicked, setClicked] = useState(false);
   const [count, setCount] = useState(0);
   const [multiplier, setMultiplier] = useState(1);
@@ -32,22 +34,15 @@ export const useMouseClickingUpgrade = () => {
     setMultiplier((prevMultiplier) => prevMultiplier + amount);
   };
 
-  const calculateTotalCost = (level, multiplier) => {
-    let totalCost = 0;
-    let cost = 10 * Math.pow(2, level);
-    for (let i = 0; i < multiplier; i++) {
-      totalCost += cost;
-      cost *= 2;
-    }
-    return totalCost;
-  };
+
 
   const addOne = () => {
-    const reqCoins = calculateTotalCost(addOneLevel, PurchaceMultiplierState);
+
+    const reqCoins = calculateTotalCost(addOneUpgradeCost, addOneLevel, purchaceMultiplierState);
     if (count >= reqCoins) {
-      setAddOneLevel((prevAddOneLevel) => prevAddOneLevel + PurchaceMultiplierState);
+      setAddOneLevel((prevAddOneLevel) => prevAddOneLevel + purchaceMultiplierState);
       setCount((prevCount) => prevCount - reqCoins);
-      setAddOneUpgradeCost(calculateTotalCost(addOneLevel + PurchaceMultiplierState, 1));
+      setAddOneUpgradeCost((prevAddOneUpgradeCost) => prevAddOneUpgradeCost + reqCoins);
       setTotalMoneySpent((prevTotalMoneySpent) => prevTotalMoneySpent + reqCoins);
       upgradeSoundEffect();
     } else {
@@ -73,6 +68,6 @@ export const useMouseClickingUpgrade = () => {
     totalIncome,
     setTotalIncome,
     totalMoneySpent,
-    setTotalMoneySpent
+    setTotalMoneySpent,
   };
 };
