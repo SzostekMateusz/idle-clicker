@@ -2,21 +2,22 @@ import React, { useState, useEffect } from 'react';
 import './leftcontent.css';
 import UtilityBtn from './ui/UtilityBtn';
 import logo from '../assets/golden_billet.png';
+import droppingMoneyImage from '../assets/coin.png';
 import backgroundMusic from '../assets/background_music.mp3';
 import MusicBtn from './ui/musicBtn';
 import { useUpgrade } from '../context/UpgradeContext';
 
 const LeftContent = () => {
     const { count, handleClick } = useUpgrade();
-
     const [isMuted, setIsMuted] = useState(false);
     const [audio] = useState(new Audio(backgroundMusic));
     const [isAudioInitialized, setIsAudioInitialized] = useState(false);
     const [clicked, setClicked] = useState(false);
+    const [moneyArray, setMoneyArray] = useState([]);
 
     useEffect(() => {
         audio.loop = true;
-        audio.volume= 0.08;
+        audio.volume = 0.08;
         if (isAudioInitialized && !isMuted) {
             audio.play();
         }
@@ -26,7 +27,6 @@ const LeftContent = () => {
         };
     }, [audio, isMuted, isAudioInitialized]);
 
-    //Title showing money counter
     useEffect(() => {
         document.title = `${titleCounterFormat(count)} $ - Money Idle Clicker`;
     }, [count]);
@@ -50,11 +50,19 @@ const LeftContent = () => {
     };
 
     const handleButtonClick = () => {
-        setClicked(true); 
+        setClicked(true);
         setTimeout(() => {
             setClicked(false);
-        }, 80); 
-        handleClick(); 
+        }, 80);
+        handleClick();
+
+        const numberOfImages = 1;
+
+        const newMoney = [...Array(numberOfImages)].map((_, index) => ({
+            id: Date.now() + index,
+            left: Math.random() * 95,
+        }));
+        setMoneyArray([...moneyArray, ...newMoney]);
     };
 
     function counterFormat(number) {
@@ -70,17 +78,26 @@ const LeftContent = () => {
             <div className='utility-buttons-containter'>
                 <UtilityBtn image='settings' />
                 <UtilityBtn image='currency_change' />
-                <MusicBtn image='speaker' onClick={unmute} onMouseDown={initializeAudio}/>
+                <MusicBtn image='speaker' onClick={unmute} onMouseDown={initializeAudio} />
                 <MusicBtn image='speaker_muted' onClick={mute} />
             </div>
             <div className='clicker-button-containter'>
                 <span className='score-counter'>{counterFormat(count)} $</span>
                 <button className={`clicker-button ${clicked ? 'clicked' : ''}`} onClick={handleButtonClick}>
-                    <img src={logo} alt="Logo" className='clicker-image'/>
+                    <img src={logo} alt="Logo" className='clicker-image' />
                 </button>
+                {moneyArray.map(money => (
+                    <div
+                        key={money.id}
+                        className="money"
+                        style={{ left: `${money.left}%`}}
+                    >
+                        <img src={droppingMoneyImage} alt="Money" />
+                    </div>
+                ))}
             </div>
-        </div>  
+        </div>
     );
-}
+};
 
 export default LeftContent;

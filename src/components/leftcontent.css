@@ -1,44 +1,77 @@
-.leftContent{
+.leftContent {
     background-color: #252432;
     width: 65%;
     display: flex;
 }
 
-.utility-buttons-containter{
+.utility-buttons-containter {
     display: flex;
     flex-direction: column;
     padding: 3%;
     width: 5%;
 }
 
-.utility-buttons-containter > * + *{
-    margin-top: 10% ;
-    
+.utility-buttons-containter > * + * {
+    margin-top: 10%;
 }
 
-.clicker-button-containter{
+.clicker-button-containter {
     width: 95%;
     display: flex;
     flex-direction: column;
     justify-content: center; 
-    align-items: center; 
+    align-items: center;
+    position: relative; 
+    overflow: hidden; 
+    z-index: 2; 
 }
 
-.clicker-button{
+.clicker-button {
     background-color: transparent;
     border: 0px;
     cursor: pointer;
+    z-index: 3; 
 }
-.clicker-button.clicked img {
-    transform: scale(0.9); /* Skalowanie obrazka */
-    transition: transform 0.02s ease;
-  }
 
-.clicker-image{
+.clicker-button.clicked img {
+    transform: scale(0.9);
+    transition: transform 0.02s ease;
+}
+
+.clicker-image {
     height: 60vh;
+    z-index: 3; 
 }
 
 .score-counter {
-    color:white;
+    color: white;
     font-size: 4vh;
+    z-index: 3; 
+}
+
+
+.money {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    top: -50px;
+    animation: fall 3s linear forwards; 
+    z-index: 1; 
+    pointer-events: none; 
+}
+
+.money img {
+    width: 100%;
+    height: 100%;
+}
+
+@keyframes fall {
+    0% {
+        top: -50px;
+        opacity: 1;
+    }
+    100% {
+        top: 100%;
+        opacity: 0;
+    }
 }
