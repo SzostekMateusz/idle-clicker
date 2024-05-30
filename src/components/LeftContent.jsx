@@ -6,6 +6,7 @@ import droppingMoneyImage from '../assets/coin.png';
 import backgroundMusic from '../assets/background_music.mp3';
 import MusicBtn from './ui/musicBtn';
 import { useUpgrade } from '../context/UpgradeContext';
+import useClickSound from '../hooks/useClickSound'; // Import hooka
 
 const LeftContent = () => {
     const { count, handleClick } = useUpgrade();
@@ -14,6 +15,7 @@ const LeftContent = () => {
     const [isAudioInitialized, setIsAudioInitialized] = useState(false);
     const [clicked, setClicked] = useState(false);
     const [moneyArray, setMoneyArray] = useState([]);
+    const playClickSound = useClickSound(); // Zainicjuj hook
 
     useEffect(() => {
         audio.loop = true;
@@ -50,6 +52,7 @@ const LeftContent = () => {
     };
 
     const handleButtonClick = () => {
+        playClickSound(); // Odtwórz dźwięk kliknięcia
         setClicked(true);
         setTimeout(() => {
             setClicked(false);
