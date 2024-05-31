@@ -4,7 +4,8 @@ import usePurchaceRejectSound from "../hooks/usePurchaceRejectSound";
 import { CashIncomeUpgrade } from "../hooks/CashIncomeUpgrade";
 import { usePurchaceMultiplier } from "../hooks/usePurchaceMultiplier";
 import { calculateTotalCost } from "../utils/calculateTotalCost";
-import { useUpgrade } from "../context/UpgradeContext";
+import Swal from "sweetalert2";
+
 
 export const useMouseClickingUpgrade = () => {
   const upgradeSoundEffect = useSound();
@@ -47,7 +48,12 @@ export const useMouseClickingUpgrade = () => {
       upgradeSoundEffect();
     } else {
       purchaceRejectSoundEffect();
-      alert(`Not enough credits. You need ${reqCoins} coins.`);
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: `Not enough credits. You need ${reqCoins} coins.`,
+        confirmButtonText: 'OK'
+      });
     }
   };
 

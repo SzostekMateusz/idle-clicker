@@ -1,5 +1,6 @@
 import useSound from "./usePurchaceSound";
 import usePurchaceRejectSound from "./usePurchaceRejectSound";
+import Swal from "sweetalert2";
 
 const RaffleUpgrade = (count, setCount) => {
 
@@ -22,7 +23,12 @@ const RaffleUpgrade = (count, setCount) => {
             }
             else{
                 purchaceRejectSoundEffect();
-                alert(`Not enough credits. You need ${raffleCost} coins.`);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: `Not enough credits. You need ${raffleCost} coins.`,
+                    confirmButtonText: 'OK'
+                  });
             }
         }
 

@@ -79,8 +79,8 @@ const LeftContent = () => {
     return (
         <div className='leftContent'>
             <div className='utility-buttons-containter'>
-                <UtilityBtn image='settings' />
-                <UtilityBtn image='currency_change' />
+                {/* <UtilityBtn image='settings' />
+                <UtilityBtn image='currency_change' /> */}
                 <MusicBtn image='speaker' onClick={unmute} onMouseDown={initializeAudio} />
                 <MusicBtn image='speaker_muted' onClick={mute} />
             </div>

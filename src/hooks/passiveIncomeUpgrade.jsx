@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import useSound from "./usePurchaceSound";
 import usePurchaceRejectSound from "./usePurchaceRejectSound";
+import Swal from "sweetalert2";
 
 export const usePassiveIncomeUpgrade = (count, setCount, setTotalIncome, setTotalMoneySpent) => {
   const upgradeSoundEffect = useSound();
@@ -46,7 +47,12 @@ export const usePassiveIncomeUpgrade = (count, setCount, setTotalIncome, setTota
       setIntervalId(newIntervalId);
     } else {
       purchaceRejectSoundEffect();
-      alert(`Not enough credits. You need ${passiveIncomeUpgradeCost} coins.`);
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: `Not enough credits. You need ${passiveIncomeUpgradeCost} coins.`,
+        confirmButtonText: 'OK'
+      });
     }
   };
 

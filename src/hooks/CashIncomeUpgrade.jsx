@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import useSound from "./usePurchaceSound";
 import usePurchaceRejectSound from "./usePurchaceRejectSound";
+import Swal from "sweetalert2";
 
 export const CashIncomeUpgrade = (count, setCount, setTotalMoneySpent) => {
 
@@ -22,7 +23,12 @@ export const CashIncomeUpgrade = (count, setCount, setTotalMoneySpent) => {
     }
     else{
       purchaceRejectSoundEffect();
-      alert(`Not enough credits. You need ${cashUpgradeCost} coins.`);
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: `Not enough credits. You need ${cashUpgradeCost} coins.`,
+        confirmButtonText: 'OK'
+      });
     }
     
 
