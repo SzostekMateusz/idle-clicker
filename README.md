@@ -10,7 +10,7 @@ An idle clicker game immersed in the pixel world of money! 💰
 
 - Download project
 - Open project in code editor
-- Run 'npm install'
+- Run 'npm install --force'
 - Run 'npm run dev'
 - Enjoy the game 🤑
 ## Manual
