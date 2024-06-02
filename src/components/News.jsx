@@ -15,7 +15,7 @@ const News = () => {
 
   return (
     <div className="news-container">
-      <div class="news">{financialNews[index]}</div>
+      <div className="news">{financialNews[index]}</div>
     </div>
   );
 };
