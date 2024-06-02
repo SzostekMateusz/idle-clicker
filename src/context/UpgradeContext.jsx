@@ -6,11 +6,15 @@ import RaffleUpgrade from "../hooks/RaffleUpgrade";
 import { usePurchaceMultiplier } from "../hooks/usePurchaceMultiplier";
 import { calculateTotalCost } from "../utils/calculateTotalCost";
 
-const UpgradeContext = createContext();
+export const UpgradeContext = createContext();
 
 export const useUpgrade = () => useContext(UpgradeContext);
 
 export const UpgradeProvider = ({ children }) => {
+  const {
+    purchaceMultiplierState,
+    setPurchaceMultiplierState,  
+  } = usePurchaceMultiplier();
 
   const {
     clicked,
@@ -30,7 +34,7 @@ export const UpgradeProvider = ({ children }) => {
     setTotalIncome,
     totalMoneySpent,
     setTotalMoneySpent,
-  } = useMouseClickingUpgrade();
+  } = useMouseClickingUpgrade(purchaceMultiplierState);
 
   const {
     passiveIncomeUpgrade,
@@ -47,13 +51,6 @@ export const UpgradeProvider = ({ children }) => {
   const {
     raffle, raffleCost 
   } = RaffleUpgrade(count, setCount);
-
-  const {
-    purchaceMultiplierState,
-    setPurchaceMultiplierState,  
-  } = usePurchaceMultiplier();
-  
-  
 
   return (
     <UpgradeContext.Provider
@@ -84,10 +81,6 @@ export const UpgradeProvider = ({ children }) => {
         purchaceMultiplierState,
         setPurchaceMultiplierState,
         calculateTotalCost,
-        cashUpgrade,
-        cashUpgradeCost,
-        cashIncome, 
-        cashUpgradeLevel,
       }}
     >
       {children}
