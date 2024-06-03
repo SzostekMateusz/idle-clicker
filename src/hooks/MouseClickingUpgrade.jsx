@@ -14,7 +14,7 @@ export const useMouseClickingUpgrade = (count, setCount, totalIncome, setTotalIn
   const [addOneUpgradeCost, setAddOneUpgradeCost] = useState(2);
 
   const handleClick = () => {
-    const income = multiplier;  // Siła kliknięcia jest równoważna wartości multiplier
+    const income = multiplier;
     setCount(count + income);
     setTotalIncome(totalIncome + income);
     setClicked(true);
