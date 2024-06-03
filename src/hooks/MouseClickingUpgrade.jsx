@@ -1,26 +1,20 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import useSound from "../hooks/usePurchaceSound";
 import usePurchaceRejectSound from "../hooks/usePurchaceRejectSound";
-import { CashIncomeUpgrade } from "../hooks/CashIncomeUpgrade";
 import { calculateTotalCost } from "../utils/calculateTotalCost";
 import Swal from "sweetalert2";
 
-export const useMouseClickingUpgrade = (purchaceMultiplierState) => {
+export const useMouseClickingUpgrade = (count, setCount, totalIncome, setTotalIncome, totalMoneySpent, setTotalMoneySpent, purchaceMultiplierState) => {
   const upgradeSoundEffect = useSound();
   const purchaceRejectSoundEffect = usePurchaceRejectSound();
+
   const [clicked, setClicked] = useState(false);
-  const [count, setCount] = useState(0);
   const [multiplier, setMultiplier] = useState(1);
   const [addOneLevel, setAddOneLevel] = useState(0);
-  const [addOneUpgradeCost, setAddOneUpgradeCost] = useState(10);
-  const [totalIncome, setTotalIncome] = useState(0);
-  const [totalMoneySpent, setTotalMoneySpent] = useState(0);
-
-  const { cashUpgrade, cashUpgradeCost, cashIncome, cashUpgradeLevel } = CashIncomeUpgrade(count, setCount, setTotalMoneySpent);
-
+  const [addOneUpgradeCost, setAddOneUpgradeCost] = useState(2);
 
   const handleClick = () => {
-    const income = multiplier + cashIncome;
+    const income = multiplier;  // Siła kliknięcia jest równoważna wartości multiplier
     setCount(count + income);
     setTotalIncome(totalIncome + income);
     setClicked(true);
@@ -37,6 +31,7 @@ export const useMouseClickingUpgrade = (purchaceMultiplierState) => {
     const reqCoins = calculateTotalCost(addOneUpgradeCost, addOneLevel, purchaceMultiplierState);
     if (count >= reqCoins) {
       setAddOneLevel((prevAddOneLevel) => prevAddOneLevel + purchaceMultiplierState);
+      setMultiplier((prevMultiplier) => prevMultiplier + purchaceMultiplierState); // Aktualizujemy multiplier
       setCount((prevCount) => prevCount - reqCoins);
       setAddOneUpgradeCost((prevAddOneUpgradeCost) => prevAddOneUpgradeCost + reqCoins);
       setTotalMoneySpent((prevTotalMoneySpent) => prevTotalMoneySpent + reqCoins);
@@ -62,10 +57,6 @@ export const useMouseClickingUpgrade = (purchaceMultiplierState) => {
     addOne,
     addOneLevel,
     addOneUpgradeCost,
-    cashUpgrade,
-    cashUpgradeCost,
-    cashUpgradeLevel,
-    cashIncome,
     totalIncome,
     setTotalIncome,
     totalMoneySpent,

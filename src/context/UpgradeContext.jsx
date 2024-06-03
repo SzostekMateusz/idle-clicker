@@ -4,6 +4,7 @@ import { usePassiveIncomeUpgrade } from "../hooks/PassiveIncomeUpgrade";
 import { PassiveBankIncomeUpgrade } from "../hooks/BankIncomeUpgrade";
 import RaffleUpgrade from "../hooks/RaffleUpgrade";
 import { usePurchaceMultiplier } from "../hooks/usePurchaceMultiplier";
+import { CashIncomeUpgrade } from "../hooks/CashIncomeUpgrade";
 import { calculateTotalCost } from "../utils/calculateTotalCost";
 
 export const UpgradeContext = createContext();
@@ -16,25 +17,19 @@ export const UpgradeProvider = ({ children }) => {
     setPurchaceMultiplierState,  
   } = usePurchaceMultiplier();
 
+  const [count, setCount] = useState(0);
+  const [totalIncome, setTotalIncome] = useState(0);
+  const [totalMoneySpent, setTotalMoneySpent] = useState(0);
+
   const {
     clicked,
-    count,
-    setCount,
     multiplier,
     handleClick,
     increaseValue,
     addOne,
     addOneLevel,
     addOneUpgradeCost,
-    cashUpgrade,
-    cashUpgradeCost,
-    cashIncome,
-    cashUpgradeLevel,
-    totalIncome,
-    setTotalIncome,
-    totalMoneySpent,
-    setTotalMoneySpent,
-  } = useMouseClickingUpgrade(purchaceMultiplierState);
+  } = useMouseClickingUpgrade(count, setCount, totalIncome, setTotalIncome, totalMoneySpent, setTotalMoneySpent, purchaceMultiplierState);
 
   const {
     passiveIncomeUpgrade,
@@ -51,12 +46,20 @@ export const UpgradeProvider = ({ children }) => {
   const {
     raffle, raffleCost 
   } = RaffleUpgrade(count, setCount);
-  
+
+  const {
+    cashUpgrade,
+    cashUpgradeCost,
+    cashIncome,
+    cashUpgradeLevel,
+  } = CashIncomeUpgrade(count, setCount, setTotalMoneySpent, purchaceMultiplierState);
+
   return (
     <UpgradeContext.Provider
       value={{
         clicked,
         count,
+        setCount,
         multiplier,
         handleClick,
         increaseValue,
@@ -71,6 +74,7 @@ export const UpgradeProvider = ({ children }) => {
         cashIncome,
         cashUpgradeLevel,
         totalIncome,
+        setTotalIncome,
         passiveBankIncomeUpgrade,
         passiveBankLevel,
         passiveBankUpgradeCost,
