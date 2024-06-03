@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState } from "react";
 import { useMouseClickingUpgrade } from "../hooks/MouseClickingUpgrade";
-import { usePassiveIncomeUpgrade } from "../hooks/passiveIncomeUpgrade";
+import { usePassiveIncomeUpgrade } from "../hooks/PassiveIncomeUpgrade";
 import { PassiveBankIncomeUpgrade } from "../hooks/BankIncomeUpgrade";
 import RaffleUpgrade from "../hooks/RaffleUpgrade";
 import { usePurchaceMultiplier } from "../hooks/usePurchaceMultiplier";
@@ -40,7 +40,7 @@ export const UpgradeProvider = ({ children }) => {
     passiveIncomeUpgrade,
     passiveIncomeLevel,
     passiveIncomeUpgradeCost,
-  } = usePassiveIncomeUpgrade(count, setCount, setTotalIncome, setTotalMoneySpent);
+  } = usePassiveIncomeUpgrade(count, setCount, setTotalIncome, setTotalMoneySpent, purchaceMultiplierState);
 
   const {
     passiveBankIncomeUpgrade,
@@ -51,7 +51,7 @@ export const UpgradeProvider = ({ children }) => {
   const {
     raffle, raffleCost 
   } = RaffleUpgrade(count, setCount);
-
+  
   return (
     <UpgradeContext.Provider
       value={{
