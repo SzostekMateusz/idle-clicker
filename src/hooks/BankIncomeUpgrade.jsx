@@ -2,15 +2,16 @@ import { useState, useEffect, useRef } from "react";
 import useSound from "./usePurchaceSound";
 import usePurchaceRejectSound from "./usePurchaceRejectSound";
 import Swal from "sweetalert2";
+import { calculateTotalCost } from "../utils/calculateTotalCost";
 
-export const PassiveBankIncomeUpgrade = (count, setCount, setTotalIncome, setTotalMoneySpent) => {
+export const PassiveBankIncomeUpgrade = (count, setCount, setTotalIncome, setTotalMoneySpent, purchaceMultiplierState) => {
   const upgradeSoundEffect = useSound();
   const purchaceRejectSoundEffect = usePurchaceRejectSound();
 
   const [intervalId, setIntervalId] = useState(null);
   const [passiveBankIncomeCounter, setPassiveBankIncomeCounter] = useState(0);
   const [passiveBankLevel, setPassiveBankLevel] = useState(0);
-  const [passiveBankUpgradeCost, setPassiveBankUpgradeCost] = useState(1);
+  const [passiveBankUpgradeCost, setPassiveBankUpgradeCost] = useState(2);
 
   const passiveBankIncomeCounterRef = useRef(passiveBankIncomeCounter);
 
@@ -27,7 +28,8 @@ export const PassiveBankIncomeUpgrade = (count, setCount, setTotalIncome, setTot
   }, [intervalId]);
 
   const passiveBankIncomeUpgrade = () => {
-    if (count >= passiveBankUpgradeCost) {
+    const reqCoins = calculateTotalCost(passiveBankUpgradeCost, passiveBankLevel, purchaceMultiplierState);
+    if (count >= reqCoins) {
       setCount((prevCount) => prevCount - passiveBankUpgradeCost);
       setPassiveBankIncomeCounter((prevCounter) => prevCounter + 30);
       setPassiveBankUpgradeCost((prevCost) => Math.round(prevCost * 1.4));
@@ -50,7 +52,7 @@ export const PassiveBankIncomeUpgrade = (count, setCount, setTotalIncome, setTot
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
-        text: `Not enough credits. You need ${passiveBankUpgradeCost} coins.`,
+        text: `Not enough credits. You need ${reqCoins} coins.`,
         confirmButtonText: 'OK'
       });
     }
