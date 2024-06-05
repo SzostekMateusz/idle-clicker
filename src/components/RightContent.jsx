@@ -65,7 +65,7 @@ const RightContent = () => {
         />
         <UpgradeBox
           title="Raffle"
-          upgradePrice={calculateTotalCost(raffleCost, 0, purchaceMultiplierState)}
+          upgradePrice={raffleCost}
           image="raffle"
           onClick={raffle}
           upgradeLevel="-"
