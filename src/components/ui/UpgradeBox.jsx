@@ -14,7 +14,7 @@ const UpgradeBox = ({ title, upgradePrice, image, onClick, upgradeLevel }) => {
         <div className="upgrade-title">{title}</div>
         <div className="cont-smt">
           <div className="progress-bar"></div>
-          <button id="upgrade-button" onClick={onClick}>
+          <button className="upgrade-button" onClick={onClick}>
             Upgrade {upgradePrice}$
           </button>
         </div>
