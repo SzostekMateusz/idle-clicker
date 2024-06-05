@@ -1,9 +1,8 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./rightcontent.css";
 import MultiplierBtn from "./ui/MultiplierBtn";
 import UpgradeBox from "./ui/UpgradeBox";
 import { useUpgrade } from "../context/UpgradeContext";
-
 
 const RightContent = () => {
   const {
@@ -26,13 +25,23 @@ const RightContent = () => {
     calculateTotalCost,
   } = useUpgrade();
 
+  const [selectedMultiplier, setSelectedMultiplier] = useState(1);
+
+  useEffect(() => {
+    setPurchaceMultiplierState(1);
+  }, [setPurchaceMultiplierState]);
+
+  const handleMultiplierClick = (multiplier) => {
+    setPurchaceMultiplierState(multiplier);
+    setSelectedMultiplier(multiplier);
+  };
   return (
     <div className="rightContent">
       <div className="multiplier-containter">
-        <MultiplierBtn multiplier={1} onClick={() => setPurchaceMultiplierState(1)}/>
-        <MultiplierBtn multiplier={5} onClick={() => setPurchaceMultiplierState(5)}/>
-        <MultiplierBtn multiplier={10} onClick={() => setPurchaceMultiplierState(10)}/>
-        <MultiplierBtn multiplier={25} onClick={() => setPurchaceMultiplierState(25)}/>
+        <MultiplierBtn multiplier={1}  onClick={() => handleMultiplierClick(1)} isSelected={selectedMultiplier === 1}/>
+        <MultiplierBtn multiplier={5}  onClick={() => handleMultiplierClick(5)} isSelected={selectedMultiplier === 5}/>
+        <MultiplierBtn multiplier={10}  onClick={() => handleMultiplierClick(10)} isSelected={selectedMultiplier === 10}/>
+        <MultiplierBtn multiplier={25}  onClick={() => handleMultiplierClick(25)} isSelected={selectedMultiplier === 25}/>
       </div>
       <div className="upgrades-containter">
         <UpgradeBox
