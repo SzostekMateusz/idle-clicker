@@ -44,7 +44,7 @@ export const PassiveBankIncomeUpgrade = (count, setCount, setTotalIncome, setTot
         const income = passiveBankIncomeCounterRef.current;
         setCount((prevCount) => prevCount + income);
         setTotalIncome((prevTotalIncome) => prevTotalIncome + income)
-      }, 1000);
+      }, 2000);
       setIntervalId(newIntervalId); 
     } else {
       purchaceRejectSoundEffect();
