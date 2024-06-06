@@ -1,4 +1,4 @@
-.upgrade-box-containter{
+.upgrade-box-containter {
     display: flex;
     width: 90%;
     background-color: #D9D9D9;
@@ -9,20 +9,20 @@
     box-shadow: 3px 14px 24px -20px rgba(66, 68, 90, 1);
 }
 
-.upgrade-box-left{
+.upgrade-box-left {
     position: relative;
     width: 25%;
     background-color: black;
 }
 
-.asset-image{
+.asset-image {
     width: 30%;
     height: 30%;
     margin-left: 15%;
     margin-top: 10%;
 }
 
-.upgrade-level{
+.upgrade-level {
     position: absolute;
     bottom: 5px;
     left: 5px;
@@ -31,30 +31,40 @@
     font-size: 1vw;
 }
 
-.upgrade-box-right{
+.upgrade-box-right {
     width: 75%;
     height: 100%;
     margin: 3%;
 }
 
-.upgrade-title{
+.upgrade-title {
     font-size: 1.1vw;
     font-weight: bold;
     padding-bottom: 2%;
 }
 
-.cont-smt{
+.cont-smt {
     display: flex;
+    align-items: center;
 }
 
-.progress-bar{
+.progress-bar {
     width: 75%;
-    background-color: #252432;
+    height: 20px;
+    background-color: #e0e0e0;
     border-radius: 0.5em;
     margin-right: 2.5%;
+    overflow: hidden;
 }
 
-.upgrade-button{
+.progress-bar-inner {
+    height: 100%;
+    background-color: #252432;
+    border-radius: 0.5em;
+    transition: width 0.02s linear;
+}
+
+.upgrade-button {
     width: 25%;
     cursor: pointer;
     color: white;
