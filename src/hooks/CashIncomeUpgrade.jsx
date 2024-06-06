@@ -18,7 +18,6 @@ export const CashIncomeUpgrade = (count, setCount, setTotalMoneySpent, purchaceM
       setCount((prevCount) => prevCount - reqCoins);
       setCashIncome((prevCashIncome) => prevCashIncome + 10 * purchaceMultiplierState);
       setCashUpgradeLevel((prevCashUpgradeLevel) => prevCashUpgradeLevel + purchaceMultiplierState);
-      setCashUpgradeCost((prevCashUpgradeCost) => Math.round(prevCashUpgradeCost * 2)); //to delete
       setTotalMoneySpent((prevTotalMoneySpent) => prevTotalMoneySpent + reqCoins);
       UpgradeSoundEffect();
     } else {
