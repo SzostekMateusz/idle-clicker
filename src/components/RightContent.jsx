@@ -3,8 +3,12 @@ import "./rightcontent.css";
 import MultiplierBtn from "./ui/MultiplierBtn";
 import UpgradeBox from "./ui/UpgradeBox";
 import { useUpgrade } from "../context/UpgradeContext";
+import useClickSound from '../hooks/useClickSound';
 
 const RightContent = () => {
+
+  const playClickSound = useClickSound();
+
   const {
     addOne,
     addOneLevel,
@@ -34,6 +38,7 @@ const RightContent = () => {
   const handleMultiplierClick = (multiplier) => {
     setPurchaceMultiplierState(multiplier);
     setSelectedMultiplier(multiplier);
+    playClickSound();
   };
 
   return (
