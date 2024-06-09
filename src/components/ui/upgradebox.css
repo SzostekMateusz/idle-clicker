@@ -51,17 +51,27 @@
 .progress-bar {
     width: 75%;
     height: 20px;
-    background-color: #e0e0e0;
     border-radius: 0.5em;
     margin-right: 2.5%;
     overflow: hidden;
+    position: relative;
 }
 
-.progress-bar-inner {
-    height: 100%;
-    background-color: #252432;
+/* WebKit browsers */
+.progress-bar::-webkit-progress-bar {
+    background-color: #948f8f;
     border-radius: 0.5em;
-    transition: width 0.02s linear;
+}
+
+.progress-bar::-webkit-progress-value {
+    background-color: #252432; 
+    border-radius: 0.5em;
+}
+
+/*Firefox */
+.progress-bar::-moz-progress-bar {
+    background-color:#252432;
+    border-radius: 0.5em;
 }
 
 .upgrade-button {
