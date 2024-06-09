@@ -27,13 +27,13 @@ export const PassiveBankIncomeUpgrade = (count, setCount, setTotalIncome, setTot
     };
   }, [intervalId]);
 
-  const passiveBankIncomeUpgrade = () => {
+  const passiveBankIncomeUpgrade = (onSuccess, onFailure) => {
     const reqCoins = calculateTotalCost(passiveBankUpgradeCost, passiveBankLevel, purchaceMultiplierState);
     if (count >= reqCoins) {
       setCount((prevCount) => prevCount - reqCoins);
       setPassiveBankIncomeCounter((prevCounter) => prevCounter + 30 * purchaceMultiplierState);
       setPassiveBankLevel((prevLevel) => prevLevel + purchaceMultiplierState);
-      setTotalMoneySpent((prevTotalMoneySpent) => prevTotalMoneySpent + reqCoins)
+      setTotalMoneySpent((prevTotalMoneySpent) => prevTotalMoneySpent + reqCoins);
       upgradeSoundEffect();
 
       if (intervalId) {
@@ -43,17 +43,14 @@ export const PassiveBankIncomeUpgrade = (count, setCount, setTotalIncome, setTot
       const newIntervalId = setInterval(() => {
         const income = passiveBankIncomeCounterRef.current;
         setCount((prevCount) => prevCount + income);
-        setTotalIncome((prevTotalIncome) => prevTotalIncome + income)
+        setTotalIncome((prevTotalIncome) => prevTotalIncome + income);
       }, 2000);
-      setIntervalId(newIntervalId); 
+      setIntervalId(newIntervalId);
+
+      if (onSuccess) onSuccess();
     } else {
       purchaceRejectSoundEffect();
-      Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: `Not enough credits. You need ${reqCoins} coins.`,
-        confirmButtonText: 'OK'
-      });
+      if (onFailure) onFailure();
     }
   };
 

@@ -27,7 +27,7 @@ export const usePassiveIncomeUpgrade = (count, setCount, setTotalIncome, setTota
     };
   }, [intervalId]);
 
-  const passiveIncomeUpgrade = () => {
+  const passiveIncomeUpgrade = (onSuccess) => {
     const reqCoins = calculateTotalCost(passiveIncomeUpgradeCost, passiveIncomeLevel, purchaceMultiplierState);
     if (count >= reqCoins) {
       setCount((prevCount) => prevCount - reqCoins);
@@ -47,6 +47,9 @@ export const usePassiveIncomeUpgrade = (count, setCount, setTotalIncome, setTota
         setTotalIncome((prevTotalIncome) => prevTotalIncome + income);
       }, 2000);
       setIntervalId(newIntervalId);
+
+      // Callback on success
+      if (onSuccess) onSuccess();
     } else {
       purchaceRejectSoundEffect();
       Swal.fire({

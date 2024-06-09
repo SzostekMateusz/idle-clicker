@@ -1,12 +1,14 @@
 import React, { useEffect, useState, useRef } from 'react';
 import "./upgradebox.css";
 import images from "../../imageImport.js";
+import Swal from "sweetalert2";
 
-const UpgradeBox = ({ title, upgradePrice, image, onClick, upgradeLevel }) => {
+const UpgradeBox = ({ title, upgradePrice, image, onClick, upgradeLevel, upgradeCost }) => {
   const [progress, setProgress] = useState(0);
   const [isProgressActive, setIsProgressActive] = useState(false);
   const animationFrameId = useRef(null);
   const startTime = useRef(null);
+  const intervalDuration = 2000;
 
   const selectedImage = images[image];
 
@@ -15,11 +17,11 @@ const UpgradeBox = ({ title, upgradePrice, image, onClick, upgradeLevel }) => {
       if (!startTime.current) startTime.current = timestamp;
       const elapsed = timestamp - startTime.current;
 
-      if (elapsed >= 2000) {
+      if (elapsed >= intervalDuration) {
         setProgress(0);
         startTime.current = timestamp;
       } else {
-        setProgress((elapsed / 2000) * 100);
+        setProgress((elapsed / intervalDuration) * 100);
       }
 
       animationFrameId.current = requestAnimationFrame(animate);
@@ -33,12 +35,20 @@ const UpgradeBox = ({ title, upgradePrice, image, onClick, upgradeLevel }) => {
   }, [isProgressActive]);
 
   const handleUpgradeClick = () => {
-    onClick();
-    setProgress(0); // Reset progress to 0
-    startTime.current = null; // Reset start time
-    if (!isProgressActive) {
-      setIsProgressActive(true);
-    }
+    onClick(() => {
+      setProgress(0);
+      startTime.current = null;
+      if (!isProgressActive) {
+        setIsProgressActive(true);
+      }
+    }, () => {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: `Not enough credits. You need ${upgradeCost} coins.`,
+        confirmButtonText: 'OK'
+      });
+    });
   };
 
   return (
@@ -50,9 +60,7 @@ const UpgradeBox = ({ title, upgradePrice, image, onClick, upgradeLevel }) => {
       <div className="upgrade-box-right">
         <div className="upgrade-title">{title}</div>
         <div className="cont-smt">
-          <div className="progress-bar">
-            <div className="progress-bar-inner" style={{ width: `${progress}%` }}></div>
-          </div>
+          <progress className="progress-bar" value={progress} max="100"></progress>
           <button className="upgrade-button" onClick={handleUpgradeClick}>
             Upgrade {upgradePrice}$
           </button>
