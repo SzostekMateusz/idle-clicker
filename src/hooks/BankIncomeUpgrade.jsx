@@ -31,8 +31,8 @@ export const PassiveBankIncomeUpgrade = (count, setCount, setTotalIncome, setTot
     const reqCoins = calculateTotalCost(passiveBankUpgradeCost, passiveBankLevel, purchaceMultiplierState);
     if (count >= reqCoins) {
       setCount((prevCount) => prevCount - reqCoins);
-      setPassiveBankIncomeCounter((prevCounter) => prevCounter + 30);
-      setPassiveBankLevel((prevLevel) => prevLevel + 1);
+      setPassiveBankIncomeCounter((prevCounter) => prevCounter + 30 * purchaceMultiplierState);
+      setPassiveBankLevel((prevLevel) => prevLevel + purchaceMultiplierState);
       setTotalMoneySpent((prevTotalMoneySpent) => prevTotalMoneySpent + reqCoins)
       upgradeSoundEffect();
 
