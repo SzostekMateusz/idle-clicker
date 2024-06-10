@@ -68,13 +68,14 @@ const RightContent = () => {
           upgradeLevel={passiveIncomeLevel}
           upgradeCost={calculateTotalCost(passiveIncomeUpgradeCost, passiveIncomeLevel, purchaceMultiplierState)}
         />
-        <UpgradeBox
+        <ClickUpgradeBox
           title="Cash"
           upgradePrice={calculateTotalCost(cashUpgradeCost, cashUpgradeLevel, purchaceMultiplierState)}
           image="cash"
           onClick={cashUpgrade}
           upgradeLevel={cashUpgradeLevel}
           upgradeCost={calculateTotalCost(cashUpgradeCost, cashUpgradeLevel, purchaceMultiplierState)}
+          multiplier={multiplier}
         />
         <UpgradeBox
           title="Bank Deposit"
