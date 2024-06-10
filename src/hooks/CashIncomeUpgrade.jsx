@@ -4,7 +4,7 @@ import usePurchaceRejectSound from "./usePurchaceRejectSound";
 import Swal from "sweetalert2";
 import { calculateTotalCost } from "../utils/calculateTotalCost";
 
-export const CashIncomeUpgrade = (count, setCount, setTotalMoneySpent, purchaceMultiplierState) => {
+export const CashIncomeUpgrade = (count, setCount, setTotalMoneySpent, purchaceMultiplierState, increaseValue) => {
   const UpgradeSoundEffect = useSound();
   const purchaceRejectSoundEffect = usePurchaceRejectSound();
 
@@ -19,6 +19,7 @@ export const CashIncomeUpgrade = (count, setCount, setTotalMoneySpent, purchaceM
       setCashIncome((prevCashIncome) => prevCashIncome + 10 * purchaceMultiplierState);
       setCashUpgradeLevel((prevCashUpgradeLevel) => prevCashUpgradeLevel + purchaceMultiplierState);
       setTotalMoneySpent((prevTotalMoneySpent) => prevTotalMoneySpent + reqCoins);
+      increaseValue(10 * purchaceMultiplierState);
       UpgradeSoundEffect();
     } else {
       purchaceRejectSoundEffect();

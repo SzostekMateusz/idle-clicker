@@ -52,7 +52,7 @@ export const UpgradeProvider = ({ children }) => {
     cashUpgradeCost,
     cashIncome,
     cashUpgradeLevel,
-  } = CashIncomeUpgrade(count, setCount, setTotalMoneySpent, purchaceMultiplierState);
+  } = CashIncomeUpgrade(count, setCount, setTotalMoneySpent, purchaceMultiplierState, increaseValue);
 
   return (
     <UpgradeContext.Provider
