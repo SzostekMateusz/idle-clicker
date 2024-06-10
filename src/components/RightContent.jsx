@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import "./rightcontent.css";
 import MultiplierBtn from "./ui/MultiplierBtn";
 import UpgradeBox from "./ui/UpgradeBox";
+import ClickUpgradeBox from "./ui/ClickUpgradeBox";
 import { useUpgrade } from "../context/UpgradeContext";
 import useClickSound from '../hooks/useClickSound';
 
 const RightContent = () => {
-
   const playClickSound = useClickSound();
 
   const {
@@ -27,6 +27,7 @@ const RightContent = () => {
     purchaceMultiplierState,
     setPurchaceMultiplierState,
     calculateTotalCost,
+    multiplier,
   } = useUpgrade();
 
   const [selectedMultiplier, setSelectedMultiplier] = useState(1);
@@ -50,13 +51,14 @@ const RightContent = () => {
         <MultiplierBtn multiplier={25} onClick={() => handleMultiplierClick(25)} isSelected={selectedMultiplier === 25} />
       </div>
       <div className="upgrades-containter">
-        <UpgradeBox
+        <ClickUpgradeBox
           title="Coin"
           upgradePrice={calculateTotalCost(addOneUpgradeCost, addOneLevel, purchaceMultiplierState)}
           image="coin"
           onClick={addOne}
           upgradeLevel={addOneLevel}
           upgradeCost={calculateTotalCost(addOneUpgradeCost, addOneLevel, purchaceMultiplierState)}
+          multiplier={multiplier}
         />
         <UpgradeBox
           title="Golden Billet"
