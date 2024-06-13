@@ -5,6 +5,7 @@ import UpgradeBox from "./ui/UpgradeBox";
 import ClickUpgradeBox from "./ui/ClickUpgradeBox";
 import { useUpgrade } from "../context/UpgradeContext";
 import useClickSound from '../hooks/useClickSound';
+import RaffleUpgradeBox from "./ui/RaffleUpgradeBox";
 
 const RightContent = () => {
   const playClickSound = useClickSound();
@@ -85,7 +86,7 @@ const RightContent = () => {
           upgradeLevel={passiveBankLevel}
           upgradeCost={calculateTotalCost(passiveBankUpgradeCost, passiveBankLevel, purchaceMultiplierState)}
         />
-        <UpgradeBox
+        <RaffleUpgradeBox
           title="Raffle"
           upgradePrice={raffleCost}
           image="raffle"
