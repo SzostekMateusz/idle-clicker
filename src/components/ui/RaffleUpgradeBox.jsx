@@ -3,20 +3,11 @@ import "./clickupgradebox.css";
 import images from "../../imageImport.js";
 import Swal from "sweetalert2";
 
-const RaffleUpgradeBox = ({ title, upgradePrice, image, onClick, upgradeLevel, upgradeCost, multiplier }) => {
+const RaffleUpgradeBox = ({ title, upgradePrice, image, onClick, upgradeLevel, raffleWins, raffleLoses }) => {
   const selectedImage = images[image];
 
   const handleUpgradeClick = () => {
-    onClick(() => {
-      
-    }, () => {
-      Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: `Not enough credits. You need ${upgradeCost} coins.`,
-        confirmButtonText: 'OK'
-      });
-    });
+    onClick();
   };
 
   return (
@@ -28,10 +19,9 @@ const RaffleUpgradeBox = ({ title, upgradePrice, image, onClick, upgradeLevel, u
       <div className="click-upgrade-box-right">
         <div className="click-upgrade-title">{title}</div>
         <div className="click-cont-smt">
-        <div className="clicks-per-upgrade">
-        Win:0 / Lose: 0
-        </div>
-        
+          <div className="clicks-per-upgrade">
+            Wins: {raffleWins} / Losses: {raffleLoses}
+          </div>
           <button className="click-upgrade-button" onClick={handleUpgradeClick}>
             Upgrade {upgradePrice}$
           </button>
@@ -42,6 +32,3 @@ const RaffleUpgradeBox = ({ title, upgradePrice, image, onClick, upgradeLevel, u
 };
 
 export default RaffleUpgradeBox;
-
-
-//add raffle win/lose counter

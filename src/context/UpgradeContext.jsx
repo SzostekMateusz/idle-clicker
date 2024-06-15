@@ -44,7 +44,7 @@ export const UpgradeProvider = ({ children }) => {
   } = PassiveBankIncomeUpgrade(count, setCount, setTotalIncome, setTotalMoneySpent, purchaceMultiplierState);
 
   const {
-    raffle, raffleCost 
+    raffle, raffleCost, raffleWins, raffleLoses
   } = RaffleUpgrade(count, setCount);
 
   const {
@@ -82,6 +82,8 @@ export const UpgradeProvider = ({ children }) => {
         setTotalMoneySpent,
         raffle,
         raffleCost,
+        raffleWins,
+        raffleLoses,
         purchaceMultiplierState,
         setPurchaceMultiplierState,
         calculateTotalCost,

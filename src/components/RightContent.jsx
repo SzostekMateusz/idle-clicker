@@ -9,6 +9,7 @@ import RaffleUpgradeBox from "./ui/RaffleUpgradeBox";
 
 const RightContent = () => {
   const playClickSound = useClickSound();
+  
 
   const {
     addOne,
@@ -25,6 +26,8 @@ const RightContent = () => {
     passiveBankUpgradeCost,
     raffle,
     raffleCost,
+    raffleWins,
+    raffleLoses,
     purchaceMultiplierState,
     setPurchaceMultiplierState,
     calculateTotalCost,
@@ -92,7 +95,8 @@ const RightContent = () => {
           image="raffle"
           onClick={raffle}
           upgradeLevel="-"
-          upgradeCost={raffleCost}
+          raffleWins={raffleWins}
+          raffleLoses={raffleLoses}
         />
       </div>
     </div>
