@@ -5,6 +5,7 @@
 - create new upgrade button for click power upgrades
 - add bitcoin upgrade
 - fix: coin multi buy calculation gives different output than buying multiple ugpgrades by single click
+- clean code
 - ~~add sound to Multiplier buttons~~
 - ~~fix: cashupgrade~~
 - ~~fix: bank multipler buy~~
