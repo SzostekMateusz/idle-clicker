@@ -8,7 +8,6 @@
     display: flex;
     justify-content: space-around;
     height: 12%;
-    /* background-color: red; */
     background-color: #ffCC00;
     align-items: center;
     margin-bottom: 2%;
@@ -20,10 +19,10 @@
 .upgrades-containter{
     display: flex;
     flex-direction: column;
-    justify-content: center; /* Wyśrodkowanie w pionie */
-    align-items: center; /* Wyśrodkowanie w poziomie */
+    justify-content: center;
+    align-items: center;
 }
 
 .upgrades-containter > * + * {
-    margin-top: 1%; /* Ustawia przerwę między elementami */
+    margin-top: 1%;
 }
