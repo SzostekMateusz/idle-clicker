@@ -7,6 +7,7 @@ import { useUpgrade } from "../context/UpgradeContext";
 import useClickSound from '../hooks/useClickSound';
 import RaffleUpgradeBox from "./ui/RaffleUpgradeBox";
 
+
 const formatNumber = (value) => {
   if (value < 1000) {
     return value.toString();
@@ -45,6 +46,9 @@ const RightContent = () => {
     setPurchaceMultiplierState,
     calculateTotalCost,
     multiplier,
+    bitcoinUpgrade,
+    bitcoinUpgradeCost,
+    bitcoinUpgradeLevel,
   } = useUpgrade();
 
   const [selectedMultiplier, setSelectedMultiplier] = useState(1);
@@ -102,6 +106,16 @@ const RightContent = () => {
           upgradeLevel={passiveBankLevel}
           upgradeCost={calculateTotalCost(passiveBankUpgradeCost, passiveBankLevel, purchaceMultiplierState)}
         />
+        <ClickUpgradeBox
+          title="Bitcoin"
+          upgradePrice={formatNumber(calculateTotalCost(bitcoinUpgradeCost, bitcoinUpgradeLevel, purchaceMultiplierState))}
+          image="bitcoin"  // Corrected image prop
+          onClick={bitcoinUpgrade}  // Corrected onClick prop
+          upgradeLevel={bitcoinUpgradeLevel}  // Corrected upgradeLevel prop
+          upgradeCost={calculateTotalCost(bitcoinUpgradeCost, bitcoinUpgradeLevel, purchaceMultiplierState)}  // Corrected upgradeCost prop
+          multiplier={multiplier}
+        />
+
         <RaffleUpgradeBox
           title="Raffle"
           upgradePrice={formatNumber(raffleCost)}

@@ -1,11 +1,12 @@
 import React, { createContext, useContext, useState } from "react";
 import { useMouseClickingUpgrade } from "../hooks/MouseClickingUpgrade";
-import { usePassiveIncomeUpgrade } from "../hooks/PassiveIncomeUpgrade";
+import { usePassiveIncomeUpgrade } from "../hooks/passiveIncomeUpgrade";
 import { PassiveBankIncomeUpgrade } from "../hooks/BankIncomeUpgrade";
 import RaffleUpgrade from "../hooks/RaffleUpgrade";
 import { usePurchaceMultiplier } from "../hooks/usePurchaceMultiplier";
 import { CashIncomeUpgrade } from "../hooks/CashIncomeUpgrade";
 import { calculateTotalCost } from "../utils/calculateTotalCost";
+import { BitcoinIncomeUpgrade } from "../hooks/BitcoinClickingUpgrade";
 
 export const UpgradeContext = createContext();
 
@@ -54,6 +55,14 @@ export const UpgradeProvider = ({ children }) => {
     cashUpgradeLevel,
   } = CashIncomeUpgrade(count, setCount, setTotalMoneySpent, purchaceMultiplierState, increaseValue);
 
+  const {
+    bitcoinUpgrade,
+    bitcoinUpgradeCost,
+    bitcoinIncome,
+    bitcoinUpgradeLevel,
+  } = BitcoinIncomeUpgrade(count, setCount, setTotalMoneySpent, purchaceMultiplierState, increaseValue);
+
+
   return (
     <UpgradeContext.Provider
       value={{
@@ -87,6 +96,10 @@ export const UpgradeProvider = ({ children }) => {
         purchaceMultiplierState,
         setPurchaceMultiplierState,
         calculateTotalCost,
+        bitcoinUpgrade,
+        bitcoinUpgradeCost,
+        bitcoinIncome,
+        bitcoinUpgradeLevel,
       }}
     >
       {children}
