@@ -12,8 +12,12 @@ const formatNumber = (value) => {
     return value.toString();
   } else if (value >= 1000 && value < 1000000) {
     return (value / 1000).toFixed(1).replace(/\.0$/, '') + 'k';
-  } else if (value >= 1000000) {
+  } else if (value >= 1000000 && value < 1000000000) {
     return (value / 1000000).toFixed(1).replace(/\.0$/, '') + ' mln';
+  } else if (value >= 1000000000 && value < 1000000000000) {
+    return (value / 1000000000).toFixed(1).replace(/\.0$/, '') + ' mld';
+  } else if (value >= 1000000000000 && value < 1000000000000000) {
+    return (value / 1000000000000).toFixed(1).replace(/\.0$/, '') + ' bln';
   }
 };
 
