@@ -67,9 +67,9 @@ const RightContent = () => {
     <div className="rightContent">
       <div className="multiplier-containter">
         <MultiplierBtn multiplier={1} onClick={() => handleMultiplierClick(1)} isSelected={selectedMultiplier === 1} />
+        <MultiplierBtn multiplier={2} onClick={() => handleMultiplierClick(2)} isSelected={selectedMultiplier === 2} />
         <MultiplierBtn multiplier={5} onClick={() => handleMultiplierClick(5)} isSelected={selectedMultiplier === 5} />
         <MultiplierBtn multiplier={10} onClick={() => handleMultiplierClick(10)} isSelected={selectedMultiplier === 10} />
-        <MultiplierBtn multiplier={25} onClick={() => handleMultiplierClick(25)} isSelected={selectedMultiplier === 25} />
       </div>
       <div className="upgrades-containter">
         <ClickUpgradeBox
@@ -109,13 +109,12 @@ const RightContent = () => {
         <ClickUpgradeBox
           title="Bitcoin"
           upgradePrice={formatNumber(calculateTotalCost(bitcoinUpgradeCost, bitcoinUpgradeLevel, purchaceMultiplierState))}
-          image="bitcoin"  // Corrected image prop
-          onClick={bitcoinUpgrade}  // Corrected onClick prop
-          upgradeLevel={bitcoinUpgradeLevel}  // Corrected upgradeLevel prop
-          upgradeCost={calculateTotalCost(bitcoinUpgradeCost, bitcoinUpgradeLevel, purchaceMultiplierState)}  // Corrected upgradeCost prop
+          image="bitcoin"
+          onClick={bitcoinUpgrade}
+          upgradeLevel={bitcoinUpgradeLevel}
+          upgradeCost={calculateTotalCost(bitcoinUpgradeCost, bitcoinUpgradeLevel, purchaceMultiplierState)}
           multiplier={multiplier}
         />
-
         <RaffleUpgradeBox
           title="Raffle"
           upgradePrice={formatNumber(raffleCost)}
