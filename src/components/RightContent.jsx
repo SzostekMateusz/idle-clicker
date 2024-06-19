@@ -7,10 +7,19 @@ import { useUpgrade } from "../context/UpgradeContext";
 import useClickSound from '../hooks/useClickSound';
 import RaffleUpgradeBox from "./ui/RaffleUpgradeBox";
 
+const formatNumber = (value) => {
+  if (value < 1000) {
+    return value.toString();
+  } else if (value >= 1000 && value < 1000000) {
+    return (value / 1000).toFixed(1).replace(/\.0$/, '') + 'k';
+  } else if (value >= 1000000) {
+    return (value / 1000000).toFixed(1).replace(/\.0$/, '') + ' mln';
+  }
+};
+
 const RightContent = () => {
   const playClickSound = useClickSound();
   
-
   const {
     addOne,
     addOneLevel,
@@ -57,7 +66,7 @@ const RightContent = () => {
       <div className="upgrades-containter">
         <ClickUpgradeBox
           title="Coin"
-          upgradePrice={calculateTotalCost(addOneUpgradeCost, addOneLevel, purchaceMultiplierState)}
+          upgradePrice={formatNumber(calculateTotalCost(addOneUpgradeCost, addOneLevel, purchaceMultiplierState))}
           image="coin"
           onClick={addOne}
           upgradeLevel={addOneLevel}
@@ -66,7 +75,7 @@ const RightContent = () => {
         />
         <UpgradeBox
           title="Golden Billet"
-          upgradePrice={calculateTotalCost(passiveIncomeUpgradeCost, passiveIncomeLevel, purchaceMultiplierState)}
+          upgradePrice={formatNumber(calculateTotalCost(passiveIncomeUpgradeCost, passiveIncomeLevel, purchaceMultiplierState))}
           image="golden_billet"
           onClick={passiveIncomeUpgrade}
           upgradeLevel={passiveIncomeLevel}
@@ -74,7 +83,7 @@ const RightContent = () => {
         />
         <ClickUpgradeBox
           title="Cash"
-          upgradePrice={calculateTotalCost(cashUpgradeCost, cashUpgradeLevel, purchaceMultiplierState)}
+          upgradePrice={formatNumber(calculateTotalCost(cashUpgradeCost, cashUpgradeLevel, purchaceMultiplierState))}
           image="cash"
           onClick={cashUpgrade}
           upgradeLevel={cashUpgradeLevel}
@@ -83,7 +92,7 @@ const RightContent = () => {
         />
         <UpgradeBox
           title="Bank Deposit"
-          upgradePrice={calculateTotalCost(passiveBankUpgradeCost, passiveBankLevel, purchaceMultiplierState)}
+          upgradePrice={formatNumber(calculateTotalCost(passiveBankUpgradeCost, passiveBankLevel, purchaceMultiplierState))}
           image="bank"
           onClick={passiveBankIncomeUpgrade}
           upgradeLevel={passiveBankLevel}
@@ -91,7 +100,7 @@ const RightContent = () => {
         />
         <RaffleUpgradeBox
           title="Raffle"
-          upgradePrice={raffleCost}
+          upgradePrice={formatNumber(raffleCost)}
           image="raffle"
           onClick={raffle}
           upgradeLevel="-"
