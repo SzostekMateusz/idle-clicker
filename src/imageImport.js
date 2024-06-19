@@ -7,6 +7,7 @@ import speaker_muted from '../src/assets/speaker_muted.png'
 import cash from '../src/assets/cash.png'
 import bank from '../src/assets/bank.png'
 import raffle from '../src/assets/raffle.png'
+import bitcoin from '../src/assets/bitcoin.png'
 
 const images ={
     coin,
@@ -17,7 +18,8 @@ const images ={
     speaker_muted,
     cash,
     bank,
-    raffle
+    raffle,
+    bitcoin
 }
 
 export default images;
