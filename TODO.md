@@ -3,7 +3,7 @@
 - check if setUpgradeCost is needed cuz of calculateTotalCost
 - add endgame counter to become rich?
 - create new upgrade button for click power upgrades
-- add bitcoin upgrade
+- ~~add bitcoin upgrade~~
 - fix: coin multi buy calculation gives different output than buying multiple ugpgrades by single click
 - clean code
 - ~~add sound to Multiplier buttons~~
