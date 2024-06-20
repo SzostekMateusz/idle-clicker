@@ -1,4 +1,5 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useState, useEffect, useRef } from "react";
+import Swal from "sweetalert2";
 import { useMouseClickingUpgrade } from "../hooks/MouseClickingUpgrade";
 import { usePassiveIncomeUpgrade } from "../hooks/passiveIncomeUpgrade";
 import { PassiveBankIncomeUpgrade } from "../hooks/BankIncomeUpgrade";
@@ -7,6 +8,8 @@ import { usePurchaceMultiplier } from "../hooks/usePurchaceMultiplier";
 import { CashIncomeUpgrade } from "../hooks/CashIncomeUpgrade";
 import { calculateTotalCost } from "../utils/calculateTotalCost";
 import { BitcoinIncomeUpgrade } from "../hooks/BitcoinClickingUpgrade";
+import useVictorySound from '../hooks/useVictorySound';
+import rich_guy from '../assets/rich_guy.jpeg';
 
 export const UpgradeContext = createContext();
 
@@ -73,6 +76,44 @@ export const UpgradeProvider = ({ children }) => {
   const updateStartDate = (newDate) => {
     setStartDate(newDate);
   };
+
+  const playVictorySound = useVictorySound();
+  const alertShownRef = useRef(false); // Ref do śledzenia, czy alert został już pokazany
+
+  useEffect(() => {
+    if (count === 2 && !alertShownRef.current) {
+      alertShownRef.current = true; // Ustawienie ref na true, aby upewnić się, że alert jest wyświetlany tylko raz
+      playVictorySound();
+      Swal.fire({
+        title: "Congrats!!!<br> You are the richest person in the world!",
+        text: "Do you want to keep playing?",
+        imageUrl: rich_guy,
+        imageAlt: "Congrats Image",
+        showDenyButton: true,
+        confirmButtonColor: "#234a04",
+        denyButtonColor: "#992903",
+        confirmButtonText: "Keep playing",
+        denyButtonText: "Restart the game",
+        allowOutsideClick: false,
+        allowEscapeKey: false
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.close();
+        } else if (result.isDenied) {
+          Swal.fire({
+            title: "Restarted!",
+            text: "The game has been restarted.",
+            icon: "success",
+            allowOutsideClick: false,
+            allowEscapeKey: false
+          });
+          setCount(0);
+          alertShownRef.current = false; // Reset ref po restarcie
+          //moze reload strony, zeby wszystko zresetowac? 
+        }
+      });
+    }
+  }, [count, playVictorySound]);
 
   return (
     <UpgradeContext.Provider
