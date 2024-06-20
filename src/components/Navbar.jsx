@@ -32,14 +32,6 @@ const Navbar = () => {
             <div className='date-section'>
                 <h1>{date.toLocaleDateString()}</h1>
             </div>
-            <button onClick={() => setShowModal(true)}>Show Statistics</button>
-            {showModal && (
-                <StatisticsModal
-                    startDate={startDate}
-                    currentDate={date}
-                    onClose={() => setShowModal(false)}
-                />
-            )}
         </div>
     );
 };

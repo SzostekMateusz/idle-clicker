@@ -6,17 +6,30 @@ import droppingMoneyImage from '../assets/coin.png';
 import backgroundMusic from '../assets/background_music.mp3';
 import MusicBtn from './ui/musicBtn';
 import { useUpgrade } from '../context/UpgradeContext';
-import useClickSound from '../hooks/useClickSound'; // Import hooka
+import useClickSound from '../hooks/useClickSound';
+import StatisticsModal from './StatisticModal';
 
-const LeftContent = () => {
-    const { count, handleClick } = useUpgrade();
+const LeftContent = ({ currentDate }) => {
+    const { count, handleClick} = useUpgrade();
     const [isMuted, setIsMuted] = useState(false);
     const [audio] = useState(new Audio(backgroundMusic));
     const [isAudioInitialized, setIsAudioInitialized] = useState(false);
     const [clicked, setClicked] = useState(false);
     const [moneyArray, setMoneyArray] = useState([]);
-    const playClickSound = useClickSound(); // Zainicjuj hook
+    const playClickSound = useClickSound();
+   
+    const [date, setDate] = useState(new Date());
+    const [showModal, setShowModal] = useState(false);
+    const [startDate] = useState(new Date());
 
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setDate(prevDate => new Date(prevDate.getTime() + 24 * 60 * 60 * 1000));
+        }, 10 * 1000);
+
+        return () => clearInterval(interval);
+    }, []);
+    
     useEffect(() => {
         audio.loop = true;
         audio.volume = 0.08;
@@ -52,7 +65,7 @@ const LeftContent = () => {
     };
 
     const handleButtonClick = () => {
-        playClickSound(); // Odtwórz dźwięk kliknięcia
+        playClickSound();
         setClicked(true);
         setTimeout(() => {
             setClicked(false);
@@ -60,7 +73,6 @@ const LeftContent = () => {
         handleClick();
 
         const numberOfImages = 1;
-
         const newMoney = [...Array(numberOfImages)].map((_, index) => ({
             id: Date.now() + index,
             left: Math.random() * 95,
@@ -79,10 +91,9 @@ const LeftContent = () => {
     return (
         <div className='leftContent'>
             <div className='utility-buttons-containter'>
-                {/* <UtilityBtn image='settings' />
-                <UtilityBtn image='currency_change' /> */}
                 <MusicBtn image='speaker' onClick={unmute} onMouseDown={initializeAudio} />
                 <MusicBtn image='speaker_muted' onClick={mute} />
+                <UtilityBtn image='graph_icon' onClick={() => setShowModal(true)}/>
             </div>
             <div className='clicker-button-containter'>
                 <span className='score-counter'>{counterFormat(count)} $</span>
@@ -99,6 +110,13 @@ const LeftContent = () => {
                     </div>
                 ))}
             </div>
+            {showModal && (
+                <StatisticsModal
+                    startDate={startDate}
+                    currentDate={date}
+                    onClose={() => setShowModal(false)}
+                />
+            )}
         </div>
     );
 };
