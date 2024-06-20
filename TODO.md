@@ -17,3 +17,5 @@
 - moze jakies statystyki pokazujace ile zarobilem przez aktywa ile przez pasywa
 - stop zwrotu ulepszenia/e
 - wykres zarobków 
+- upgrade lokaty (wybieram czas/oprocentowanie) i mi oddaje co miesiac jakas kwote, ale na poczatku mi zabiera 
+- left panel button z instrukcja gry
