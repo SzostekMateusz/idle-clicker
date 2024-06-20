@@ -22,9 +22,12 @@ export const UpgradeProvider = ({ children }) => {
   const [totalIncome, setTotalIncome] = useState(0);
   const [totalMoneySpent, setTotalMoneySpent] = useState(0);
 
-  //Statistic data
+  // Statistic data
   const [clickedCounter, setClickedCounter] = useState(0);
   const [passiveCounter, setPassiveCounter] = useState(0);
+
+  // Date state
+  const [startDate, setStartDate] = useState(new Date()); // Initialize with current date
 
   const {
     clicked,
@@ -40,13 +43,13 @@ export const UpgradeProvider = ({ children }) => {
     passiveIncomeUpgrade,
     passiveIncomeLevel,
     passiveIncomeUpgradeCost,
-  } = usePassiveIncomeUpgrade(count, setCount, setTotalIncome, setTotalMoneySpent, purchaceMultiplierState);
+  } = usePassiveIncomeUpgrade(count, setCount, setTotalIncome, setTotalMoneySpent, purchaceMultiplierState, passiveCounter, setPassiveCounter);
 
   const {
     passiveBankIncomeUpgrade,
     passiveBankLevel,
     passiveBankUpgradeCost,
-  } = PassiveBankIncomeUpgrade(count, setCount, setTotalIncome, setTotalMoneySpent, purchaceMultiplierState);
+  } = PassiveBankIncomeUpgrade(count, setCount, setTotalIncome, setTotalMoneySpent, purchaceMultiplierState, passiveCounter, setPassiveCounter);
 
   const {
     raffle, raffleCost, raffleWins, raffleLoses
@@ -66,6 +69,10 @@ export const UpgradeProvider = ({ children }) => {
     bitcoinUpgradeLevel,
   } = BitcoinIncomeUpgrade(count, setCount, setTotalMoneySpent, purchaceMultiplierState, increaseValue);
 
+  // Funkcja do aktualizacji daty startowej
+  const updateStartDate = (newDate) => {
+    setStartDate(newDate);
+  };
 
   return (
     <UpgradeContext.Provider
@@ -105,7 +112,10 @@ export const UpgradeProvider = ({ children }) => {
         bitcoinIncome,
         bitcoinUpgradeLevel,
         clickedCounter, // Dodajemy clickedCounter do kontekstu
-        setClickedCounter
+        setClickedCounter,
+        passiveCounter,
+        startDate, // Przekazujemy startDate do kontekstu
+        updateStartDate, // Funkcja do aktualizacji startDate
       }}
     >
       {children}
