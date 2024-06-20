@@ -22,6 +22,10 @@ export const UpgradeProvider = ({ children }) => {
   const [totalIncome, setTotalIncome] = useState(0);
   const [totalMoneySpent, setTotalMoneySpent] = useState(0);
 
+  //Statistic data
+  const [clickedCounter, setClickedCounter] = useState(0);
+  const [passiveCounter, setPassiveCounter] = useState(0);
+
   const {
     clicked,
     multiplier,
@@ -30,7 +34,7 @@ export const UpgradeProvider = ({ children }) => {
     addOne,
     addOneLevel,
     addOneUpgradeCost,
-  } = useMouseClickingUpgrade(count, setCount, totalIncome, setTotalIncome, totalMoneySpent, setTotalMoneySpent, purchaceMultiplierState);
+  } = useMouseClickingUpgrade(count, setCount, totalIncome, setTotalIncome, totalMoneySpent, setTotalMoneySpent, purchaceMultiplierState, clickedCounter, setClickedCounter); // Przekazujemy clickedCounter
 
   const {
     passiveIncomeUpgrade,
@@ -100,6 +104,8 @@ export const UpgradeProvider = ({ children }) => {
         bitcoinUpgradeCost,
         bitcoinIncome,
         bitcoinUpgradeLevel,
+        clickedCounter, // Dodajemy clickedCounter do kontekstu
+        setClickedCounter
       }}
     >
       {children}

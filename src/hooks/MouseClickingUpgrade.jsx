@@ -1,10 +1,20 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import useSound from "../hooks/usePurchaceSound";
 import usePurchaceRejectSound from "../hooks/usePurchaceRejectSound";
 import { calculateTotalCost } from "../utils/calculateTotalCost";
 import Swal from "sweetalert2";
 
-export const useMouseClickingUpgrade = (count, setCount, totalIncome, setTotalIncome, totalMoneySpent, setTotalMoneySpent, purchaceMultiplierState) => {
+export const useMouseClickingUpgrade = (
+  count,
+  setCount,
+  totalIncome,
+  setTotalIncome,
+  totalMoneySpent,
+  setTotalMoneySpent,
+  purchaceMultiplierState,
+  clickedCounter,
+  setClickedCounter
+) => {
   const upgradeSoundEffect = useSound();
   const purchaceRejectSoundEffect = usePurchaceRejectSound();
 
@@ -15,8 +25,9 @@ export const useMouseClickingUpgrade = (count, setCount, totalIncome, setTotalIn
 
   const handleClick = () => {
     const income = multiplier;
-    setCount(count + income);
-    setTotalIncome(totalIncome + income);
+    setCount((prevCount) => prevCount + income);
+    setTotalIncome((prevTotalIncome) => prevTotalIncome + income);
+    setClickedCounter((prevClickedCounter) => prevClickedCounter + income); // Dodajemy do clickedCounter
     setClicked(true);
     setTimeout(() => {
       setClicked(false);
@@ -28,7 +39,11 @@ export const useMouseClickingUpgrade = (count, setCount, totalIncome, setTotalIn
   };
 
   const addOne = () => {
-    const reqCoins = calculateTotalCost(addOneUpgradeCost, addOneLevel, purchaceMultiplierState);
+    const reqCoins = calculateTotalCost(
+      addOneUpgradeCost,
+      addOneLevel,
+      purchaceMultiplierState
+    );
     if (count >= reqCoins) {
       setAddOneLevel((prevAddOneLevel) => prevAddOneLevel + purchaceMultiplierState);
       setMultiplier((prevMultiplier) => prevMultiplier + purchaceMultiplierState); // Aktualizujemy multiplier
