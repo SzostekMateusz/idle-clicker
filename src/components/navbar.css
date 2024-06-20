@@ -13,3 +13,19 @@
     text-align: center;
     color: black;
 }
+
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.income-section, .date-section {
+    margin: 0 10px;
+}
+
+.top-navbar{
+    display: flex;
+}
+
+
