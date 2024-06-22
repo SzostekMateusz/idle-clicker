@@ -9,6 +9,7 @@ import bank from '../src/assets/bank.png'
 import raffle from '../src/assets/raffle.png'
 import bitcoin from '../src/assets/bitcoin.png'
 import graph_icon from '../src/assets/graph_icon.png'
+import question_mark from '../src/assets/question_mark.png'
 
 const images ={
     coin,
@@ -21,7 +22,8 @@ const images ={
     bank,
     raffle,
     bitcoin,
-    graph_icon
+    graph_icon,
+    question_mark
 }
 
 export default images;
