@@ -8,6 +8,7 @@ import MusicBtn from './ui/musicBtn';
 import { useUpgrade } from '../context/UpgradeContext';
 import useClickSound from '../hooks/useClickSound';
 import StatisticsModal from './StatisticModal';
+import Swal from 'sweetalert2';
 
 const LeftContent = ({ currentDate }) => {
     const { count, handleClick} = useUpgrade();
@@ -88,12 +89,36 @@ const LeftContent = ({ currentDate }) => {
         return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
 
+    //Game instruction alert
+    const showInstruction = () => {
+        Swal.fire({
+            title: "How to play?",
+            text: "Click to make money. Buy assets to earn passive income. Manage your money wisely and become the richest man in the world!",
+            icon: "question",
+            showClass: {
+              popup: `
+                animate__animated
+                animate__fadeInUp
+                animate__faster
+              `
+            },
+            hideClass: {
+              popup: `
+                animate__animated
+                animate__fadeOutDown
+                animate__faster
+              `
+            }
+          });
+    }
+
     return (
         <div className='leftContent'>
             <div className='utility-buttons-containter'>
                 <MusicBtn image='speaker' onClick={unmute} onMouseDown={initializeAudio} />
                 <MusicBtn image='speaker_muted' onClick={mute} />
                 <UtilityBtn image='graph_icon' onClick={() => setShowModal(true)}/>
+                <UtilityBtn image='question_mark' onClick={showInstruction} />
             </div>
             <div className='clicker-button-containter'>
                 <span className='score-counter'>{counterFormat(count)} $</span>
