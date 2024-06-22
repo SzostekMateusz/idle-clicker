@@ -19,3 +19,4 @@
 - wykres zarobków 
 - upgrade lokaty (wybieram czas/oprocentowanie) i mi oddaje co miesiac jakas kwote, ale na poczatku mi zabiera 
 - ~~left panel button z instrukcja gry~~
+- może jakiś ranking po lewej (10 najbogatszych i gracz które miejsce zajmuje)
