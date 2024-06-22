@@ -95,21 +95,7 @@ const LeftContent = ({ currentDate }) => {
             title: "How to play?",
             text: "Click to make money. Buy assets to earn passive income. Manage your money wisely and become the richest man in the world!",
             icon: "question",
-            showClass: {
-              popup: `
-                animate__animated
-                animate__fadeInUp
-                animate__faster
-              `
-            },
-            hideClass: {
-              popup: `
-                animate__animated
-                animate__fadeOutDown
-                animate__faster
-              `
-            }
-          });
+        });
     }
 
     return (
