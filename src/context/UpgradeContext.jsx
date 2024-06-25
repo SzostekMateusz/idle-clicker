@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect, useRef } from "react";
 import Swal from "sweetalert2";
+import ConfettiComponent from "../components/ConfettiComponent"; 
 import { useMouseClickingUpgrade } from "../hooks/MouseClickingUpgrade";
 import { usePassiveIncomeUpgrade } from "../hooks/passiveIncomeUpgrade";
 import { PassiveBankIncomeUpgrade } from "../hooks/BankIncomeUpgrade";
@@ -80,10 +81,13 @@ export const UpgradeProvider = ({ children }) => {
   const playVictorySound = useVictorySound();
   const alertShownRef = useRef(false); // Ref do śledzenia, czy alert został już pokazany
 
+  const [confettiTrigger, setConfettiTrigger] = useState(false); // Stan do zarządzania konfetti
+
   useEffect(() => {
     if (count === 2 && !alertShownRef.current) {
       alertShownRef.current = true; // Ustawienie ref na true, aby upewnić się, że alert jest wyświetlany tylko raz
       playVictorySound();
+      setConfettiTrigger(true); // Uruchamiamy konfetti
       Swal.fire({
         title: "Congrats!!!<br> You are the richest person in the world!",
         text: "Do you want to keep playing?",
@@ -97,6 +101,7 @@ export const UpgradeProvider = ({ children }) => {
         allowOutsideClick: false,
         allowEscapeKey: false
       }).then((result) => {
+        setConfettiTrigger(false); // Wyłączamy konfetti po zamknięciu alertu
         if (result.isConfirmed) {
           Swal.close();
         } else if (result.isDenied) {
@@ -160,6 +165,7 @@ export const UpgradeProvider = ({ children }) => {
       }}
     >
       {children}
+      <ConfettiComponent trigger={confettiTrigger} /> {/* Dodajemy komponent ConfettiComponent */}
     </UpgradeContext.Provider>
   );
 };
