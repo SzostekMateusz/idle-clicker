@@ -31,7 +31,21 @@ export const UpgradeProvider = ({ children }) => {
   const [passiveCounter, setPassiveCounter] = useState(0);
 
   // Date state
-  const [startDate, setStartDate] = useState(new Date()); // Initialize with current date
+  const [startDate, setStartDate] = useState(new Date()); 
+  const [currentDate, setCurrentDate] = useState(new Date());
+  const [daysPassed, setDaysPassed] = useState(0);
+
+  const calculateDaysPassed = (startDate, currentDate) => {
+    return Math.floor((currentDate - startDate) / (1000 * 60 * 60 * 24));
+  };
+
+  useEffect(() => {
+    setDaysPassed(calculateDaysPassed(startDate, currentDate));
+  }, [startDate, currentDate]);
+
+  const updateCurrentDate = (newDate) => {
+    setCurrentDate(newDate);
+  };
 
   const {
     clicked,
@@ -73,24 +87,19 @@ export const UpgradeProvider = ({ children }) => {
     bitcoinUpgradeLevel,
   } = BitcoinIncomeUpgrade(count, setCount, setTotalMoneySpent, purchaceMultiplierState, increaseValue);
 
-  // Funkcja do aktualizacji daty startowej
-  const updateStartDate = (newDate) => {
-    setStartDate(newDate);
-  };
-
   const playVictorySound = useVictorySound();
   const alertShownRef = useRef(false); // Ref do śledzenia, czy alert został już pokazany
 
   const [confettiTrigger, setConfettiTrigger] = useState(false); // Stan do zarządzania konfetti
 
   useEffect(() => {
-    if (count === 2 && !alertShownRef.current) {
+    if (count >= 50 && !alertShownRef.current) {
       alertShownRef.current = true; // Ustawienie ref na true, aby upewnić się, że alert jest wyświetlany tylko raz
       playVictorySound();
-      setConfettiTrigger(true); // Uruchamiamy konfetti
+      setConfettiTrigger(true);
       Swal.fire({
         title: "Congrats!!!<br> You are the richest person in the world!",
-        text: "Do you want to keep playing?",
+        text: `Do you want to keep playing? You have played for ${daysPassed} days.`,
         imageUrl: rich_guy,
         imageAlt: "Congrats Image",
         showDenyButton: true,
@@ -101,7 +110,7 @@ export const UpgradeProvider = ({ children }) => {
         allowOutsideClick: false,
         allowEscapeKey: false
       }).then((result) => {
-        setConfettiTrigger(false); // Wyłączamy konfetti po zamknięciu alertu
+        setConfettiTrigger(false);
         if (result.isConfirmed) {
           Swal.close();
         } else if (result.isDenied) {
@@ -118,7 +127,8 @@ export const UpgradeProvider = ({ children }) => {
         }
       });
     }
-  }, [count, playVictorySound]);
+  }, [count, playVictorySound, daysPassed]);
+  
 
   return (
     <UpgradeContext.Provider
@@ -157,15 +167,17 @@ export const UpgradeProvider = ({ children }) => {
         bitcoinUpgradeCost,
         bitcoinIncome,
         bitcoinUpgradeLevel,
-        clickedCounter, // Dodajemy clickedCounter do kontekstu
+        clickedCounter,
         setClickedCounter,
         passiveCounter,
-        startDate, // Przekazujemy startDate do kontekstu
-        updateStartDate, // Funkcja do aktualizacji startDate
+        startDate,
+        daysPassed,
+        currentDate,
+        updateCurrentDate
       }}
     >
       {children}
-      <ConfettiComponent trigger={confettiTrigger} /> {/* Dodajemy komponent ConfettiComponent */}
+      <ConfettiComponent trigger={confettiTrigger} />
     </UpgradeContext.Provider>
   );
 };

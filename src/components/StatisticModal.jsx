@@ -13,9 +13,8 @@ ChartJS.register(
   Legend
 );
 
-const StatisticsModal = ({ startDate, currentDate, onClose }) => {
-    const daysPassed = Math.floor((currentDate - startDate) / (1000 * 60 * 60 * 24));
-    const { totalIncome, clickedCounter, passiveCounter, count  } = useUpgrade();
+const StatisticsModal = ({ onClose }) => {
+    const { startDate, currentDate, daysPassed, totalIncome, clickedCounter, passiveCounter, count } = useUpgrade();
 
     const activeIncomeData = {
         labels: ['Passive Income', 'Active Income', 'Total Money'],
@@ -41,8 +40,6 @@ const StatisticsModal = ({ startDate, currentDate, onClose }) => {
           return (value / 1000000000000).toFixed(1).replace(/\.0$/, '') + ' bln';
         }
       };
-
-   
 
     return (
         <div className='modal-overlay'>
