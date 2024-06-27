@@ -1,21 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import './navbar.css';
 import { useUpgrade } from '../context/UpgradeContext';
-import StatisticsModal from './StatisticModal';
 
 const Navbar = () => {
-    const { totalIncome, totalMoneySpent } = useUpgrade();
-    const [date, setDate] = useState(new Date());
-    const [showModal, setShowModal] = useState(false);
-    const [startDate] = useState(new Date());
+    const { totalIncome, totalMoneySpent, currentDate, updateCurrentDate } = useUpgrade();
+    const [date, setDate] = useState(currentDate);
 
     useEffect(() => {
         const interval = setInterval(() => {
-            setDate(prevDate => new Date(prevDate.getTime() + 24 * 60 * 60 * 1000));
+            const newDate = new Date(date.getTime() + 24 * 60 * 60 * 1000);
+            setDate(newDate);
+            updateCurrentDate(newDate);
         }, 10 * 1000);
 
         return () => clearInterval(interval);
-    }, []);
+    }, [date, updateCurrentDate]);
 
     function counterFormat(number) {
         return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
