@@ -6,7 +6,7 @@ import ClickUpgradeBox from "./ui/ClickUpgradeBox";
 import { useUpgrade } from "../context/UpgradeContext";
 import useClickSound from '../hooks/useClickSound';
 import RaffleUpgradeBox from "./ui/RaffleUpgradeBox";
-import BankDepositComponent from "../hooks/BankDepositUpgrade.jsx";
+import BankDepositComponent from "./BankDepositUpgrade.jsx"
 
 const formatNumber = (value) => {
   if (value < 1000) {
@@ -124,7 +124,10 @@ const RightContent = () => {
           raffleWins={raffleWins}
           raffleLoses={raffleLoses}
         />
-        <BankDepositComponent /> {/* Add the new component here */}
+        <BankDepositComponent 
+          image="bank"
+          upgradeLevel="-"
+        />
       </div>
     </div>
   );

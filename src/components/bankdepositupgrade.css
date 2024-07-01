@@ -1,0 +1,95 @@
+.click-upgrade-box-container {
+    display: flex;
+    width: 90%;
+    background-color: #D9D9D9;
+    border: 1px solid black;
+    border-radius: 5px;
+    -webkit-box-shadow: 3px 14px 24px -20px rgba(66, 68, 90, 1);
+    -moz-box-shadow: 3px 14px 24px -20px rgba(66, 68, 90, 1);
+    box-shadow: 3px 14px 24px -20px rgba(66, 68, 90, 1);
+  }
+  
+  .click-upgrade-box-left {
+    position: relative;
+    width: 25%;
+    background-color: black;
+  }
+  
+  .click-asset-image {
+    width: 30%;
+    height: 30%;
+    margin-left: 15%;
+    margin-top: 10%;
+  }
+  
+  .click-upgrade-level {
+    position: absolute;
+    bottom: 5px;
+    left: 5px;
+    color: white;
+    padding: 5px;
+    font-size: 1vw;
+  }
+  
+  .click-upgrade-box-right {
+    width: 75%;
+    height: 100%;
+    margin: 3%;
+  }
+  
+  .click-upgrade-title {
+    font-size: 1.1vw;
+    font-weight: bold;
+    padding-bottom: 2%;
+  }
+  
+  .inside-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .clicks-per-upgrade {
+    font-size: 1rem;
+    color: #181818;
+    margin-top: 5px;
+  }
+  
+  .click-upgrade-button {
+    width: 25%;
+    cursor: pointer;
+    color: white;
+    font-size: 0.7vw;
+    background-color: #212121;
+    border: 2px solid #EA8223;
+    transition: transform 0.5s ease;
+    margin-left: auto;
+  }
+
+  .deposit-inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .deposit-inputs div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .deposit-inputs p {
+    margin: 0;
+    flex: 0 0 auto; /* Ensure p elements do not grow */
+  }
+  
+  .deposit-inputs input {
+    flex: 1 1 auto; /* Allow input to grow and shrink */
+    width: 100%; /* Ensure input takes up available space */
+  }
+  
+  
+  
+  .click-upgrade-button:active {
+    transform: scale(0.4);
+  }
+  
