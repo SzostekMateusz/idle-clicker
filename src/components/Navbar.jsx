@@ -11,7 +11,7 @@ const Navbar = () => {
             const newDate = new Date(date.getTime() + 24 * 60 * 60 * 1000);
             setDate(newDate);
             updateCurrentDate(newDate);
-        }, 10 * 1000);
+        }, 1 * 1000);
 
         return () => clearInterval(interval);
     }, [date, updateCurrentDate]);
