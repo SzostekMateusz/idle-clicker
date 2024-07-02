@@ -99,9 +99,9 @@ const RightContent = () => {
           multiplier={multiplier}
         />
         <UpgradeBox
-          title="Bank Deposit"
+          title="Real Estate"
           upgradePrice={formatNumber(calculateTotalCost(passiveBankUpgradeCost, passiveBankLevel, purchaceMultiplierState))}
-          image="bank"
+          image="estate"
           onClick={passiveBankIncomeUpgrade}
           upgradeLevel={passiveBankLevel}
           upgradeCost={calculateTotalCost(passiveBankUpgradeCost, passiveBankLevel, purchaceMultiplierState)}
