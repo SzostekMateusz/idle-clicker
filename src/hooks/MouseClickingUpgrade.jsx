@@ -22,12 +22,13 @@ export const useMouseClickingUpgrade = (
   const [multiplier, setMultiplier] = useState(1);
   const [addOneLevel, setAddOneLevel] = useState(0);
   const [addOneUpgradeCost, setAddOneUpgradeCost] = useState(2);
+  const [firstPurchaseAlertShown, setFirstPurchaseAlertShown] = useState(false);
 
   const handleClick = () => {
     const income = multiplier;
     setCount((prevCount) => prevCount + income);
     setTotalIncome((prevTotalIncome) => prevTotalIncome + income);
-    setClickedCounter((prevClickedCounter) => prevClickedCounter + income); // Dodajemy do clickedCounter
+    setClickedCounter((prevClickedCounter) => prevClickedCounter + income);
     setClicked(true);
     setTimeout(() => {
       setClicked(false);
@@ -46,11 +47,22 @@ export const useMouseClickingUpgrade = (
     );
     if (count >= reqCoins) {
       setAddOneLevel((prevAddOneLevel) => prevAddOneLevel + purchaceMultiplierState);
-      setMultiplier((prevMultiplier) => prevMultiplier + purchaceMultiplierState); // Aktualizujemy multiplier
+      setMultiplier((prevMultiplier) => prevMultiplier + purchaceMultiplierState);
       setCount((prevCount) => prevCount - reqCoins);
       setAddOneUpgradeCost((prevAddOneUpgradeCost) => prevAddOneUpgradeCost + reqCoins);
       setTotalMoneySpent((prevTotalMoneySpent) => prevTotalMoneySpent + reqCoins);
       upgradeSoundEffect();
+
+      if (!firstPurchaseAlertShown) {
+        Swal.fire({
+          icon: 'info',
+          title: 'Kupiłeś ulepszenie: Coin!',
+          text: 'Gotowka i pieniadze fiat sa uwazane za jedna z gorszych inwestycji, poniewaz ich wartosc stopniowo maleje z powodu inflacji. Dlugoterminowe trzymanie gotowki moze prowadzic do utraty sily nabywczej, co czyni inne formy inwestycji, takie jak akcje czy nieruchomosci, bardziej atrakcyjnymi jako zabezpieczenie przed spadkiem wartosci pieniadza.',
+          confirmButtonText: 'OK',
+          width: '50%'
+        });
+        setFirstPurchaseAlertShown(true);
+      }
     } else {
       purchaceRejectSoundEffect();
       Swal.fire({

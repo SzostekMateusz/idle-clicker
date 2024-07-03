@@ -11,6 +11,7 @@ export const CashIncomeUpgrade = (count, setCount, setTotalMoneySpent, purchaceM
   const [cashIncome, setCashIncome] = useState(0);
   const [cashUpgradeLevel, setCashUpgradeLevel] = useState(0);
   const [cashUpgradeCost, setCashUpgradeCost] = useState(2);
+  const [firstPurchaseAlertShown, setFirstPurchaseAlertShown] = useState(false);
 
   const cashUpgrade = () => {
     const reqCoins = calculateTotalCost(cashUpgradeCost, cashUpgradeLevel, purchaceMultiplierState);
@@ -21,6 +22,18 @@ export const CashIncomeUpgrade = (count, setCount, setTotalMoneySpent, purchaceM
       setTotalMoneySpent((prevTotalMoneySpent) => prevTotalMoneySpent + reqCoins);
       increaseValue(10 * purchaceMultiplierState);
       UpgradeSoundEffect();
+
+      if (!firstPurchaseAlertShown) {
+        Swal.fire({
+          icon: 'info',
+          title: 'Kupiłeś ulepszenie: Cash!',
+          text: 'Gotowka i pieniadze fiat sa uwazane za jedna z gorszych inwestycji, poniewaz ich wartosc stopniowo maleje z powodu inflacji. Dlugoterminowe trzymanie gotowki moze prowadzic do utraty sily nabywczej, co czyni inne formy inwestycji, takie jak akcje czy nieruchomosci, bardziej atrakcyjnymi jako zabezpieczenie przed spadkiem wartosci pieniadza.',
+          confirmButtonText: 'OK',
+          width: '50%'
+        });
+        setFirstPurchaseAlertShown(true);
+      }
+
     } else {
       purchaceRejectSoundEffect();
       Swal.fire({
