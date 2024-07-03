@@ -13,6 +13,7 @@ export const usePassiveIncomeUpgrade = (count, setCount, setTotalIncome, setTota
   const [passiveIncomeLevel, setPassiveIncomeLevel] = useState(0);
   const [passiveIncomeUpgradeCost, setPassiveIncomeUpgradeCost] = useState(2);
   const [shouldStartPassiveCounter, setShouldStartPassiveCounter] = useState(false);
+  const [firstPurchaseAlertShown, setFirstPurchaseAlertShown] = useState(false);
 
   const passiveIncomeCounterRef = useRef(passiveIncomeCounter);
 
@@ -53,6 +54,17 @@ export const usePassiveIncomeUpgrade = (count, setCount, setTotalIncome, setTota
       setShouldStartPassiveCounter(true);
 
       if (onSuccess) onSuccess();
+
+      if (!firstPurchaseAlertShown) {
+        Swal.fire({
+          icon: 'info',
+          title: 'Kupiłeś ulepszenie: Golden Billet!',
+          text: 'Zloto jest cenionym surowcem ze wzgledu na swoja stabilnosc i wartosc, ktora czesto rosnie w czasach niepewnosci gospodarczej. Jest uwazane za bezpieczna przystan inwestycyjna, poniewaz moze chronic przed inflacja i niestabilnoscia rynkowa. Inwestowanie w zloto moze byc korzystne dla osob szukajacych stabilnosci w swoim portfelu, ale wartosc zlota moze rowniez podlegac wahaniom rynkowym.',
+          confirmButtonText: 'OK',
+          width: '50%'
+        });
+        setFirstPurchaseAlertShown(true);
+      }
     } else {
       purchaceRejectSoundEffect();
       Swal.fire({
