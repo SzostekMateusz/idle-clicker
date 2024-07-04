@@ -7,6 +7,7 @@
 - stop zwrotu ulepszenia/e
 - upgrade lokaty (wybieram czas/oprocentowanie) i mi oddaje co miesiac jakas kwote, ale na poczatku mi zabiera 
 - add reject sound to bank deposit
+- golden billet progress bar timing isnt synchronous with count increase after few upgrade purchaces
 
 # Done
 
