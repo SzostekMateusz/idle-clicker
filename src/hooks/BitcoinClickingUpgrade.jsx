@@ -11,6 +11,7 @@ export const BitcoinIncomeUpgrade = (count, setCount, setTotalMoneySpent, purcha
   const [bitcoinIncome, setBitcoinIncome] = useState(0);
   const [bitcoinUpgradeLevel, setBitcoinUpgradeLevel] = useState(0);
   const [bitcoinUpgradeCost, setBitcoinUpgradeCost] = useState(10000);
+  const [firstPurchaseAlertShown, setFirstPurchaseAlertShown] = useState(false);
 
   const bitcoinUpgrade = () => {
     const reqCoins = calculateTotalCost(bitcoinUpgradeCost, bitcoinUpgradeLevel, purchaceMultiplierState);
@@ -21,6 +22,17 @@ export const BitcoinIncomeUpgrade = (count, setCount, setTotalMoneySpent, purcha
       setTotalMoneySpent((prevTotalMoneySpent) => prevTotalMoneySpent + reqCoins);
       increaseValue(1000 * purchaceMultiplierState);
       UpgradeSoundEffect();
+
+      if (!firstPurchaseAlertShown) {
+        Swal.fire({
+          icon: 'info',
+          title: 'Kupiłeś ulepszenie: Bitcoin!',
+          text: 'Inwestowanie w Bitcoin i inne kryptowaluty moze przyniesc wysokie zyski dzieki ich potencjalnie gwaltownemu wzrostowi wartosci. Kryptowaluty sa zdecentralizowane, co oznacza, ze nie sa kontrolowane przez zaden rzad czy instytucje finansowa, co dla wielu inwestorow stanowi atrakcyjna ceche. Jednak sa one rowniez bardzo zmienne i ryzykowne, narazone na nagle spadki wartosci, regulacje prawne oraz problemy zwiazane z bezpieczenstwem cyfrowym.',
+          confirmButtonText: 'OK',
+          width: '50%'
+        });
+        setFirstPurchaseAlertShown(true);
+      }
     } else {
       purchaceRejectSoundEffect();
       Swal.fire({
