@@ -13,6 +13,7 @@ export const PassiveBankIncomeUpgrade = (count, setCount, setTotalIncome, setTot
   const [passiveBankLevel, setPassiveBankLevel] = useState(0);
   const [passiveBankUpgradeCost, setPassiveBankUpgradeCost] = useState(2);
   const [shouldStartPassiveCounter, setShouldStartPassiveCounter] = useState(false);
+  const [firstPurchaseAlertShown, setFirstPurchaseAlertShown] = useState(false);
 
   const passiveBankIncomeCounterRef = useRef(passiveBankIncomeCounter);
 
@@ -58,9 +59,26 @@ export const PassiveBankIncomeUpgrade = (count, setCount, setTotalIncome, setTot
       
       setShouldStartPassiveCounter(true);
 
+      if (!firstPurchaseAlertShown) {
+        Swal.fire({
+          icon: 'info',
+          title: 'Kupiłeś ulepszenie: Real Estate!',
+          text: 'Inwestowanie w nieruchomosci jest czesto uwazane za bezpieczna forme lokowania kapitalu, oferujaca stabilne zyski i ochrone przed inflacja. Nieruchomosci moga generowac regularne przychody z wynajmu oraz zyski z dlugoterminowego wzrostu wartosci. Jednak inwestycje te wymagaja duzego kapitalu poczatkowego i moga wiazac sie z ryzykiem, takim jak wahania cen na rynku nieruchomosci oraz koszty utrzymania i zarzadzania.',
+          confirmButtonText: 'OK',
+          width: '50%'
+        });
+        setFirstPurchaseAlertShown(true);
+      }
+
       if (onSuccess) onSuccess();
     } else {
       purchaceRejectSoundEffect();
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: `Not enough credits. You need ${reqCoins} coins.`,
+        confirmButtonText: 'OK'
+      });
       if (onFailure) onFailure();
     }
   };
