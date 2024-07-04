@@ -28,17 +28,24 @@ export const PassiveBankIncomeUpgrade = (count, setCount, setTotalIncome, setTot
     };
   }, [intervalId]);
 
+  const startInterval = () => {
+    if (intervalId) {
+      clearInterval(intervalId);
+    }
+    const newIntervalId = setInterval(() => {
+      const income = passiveBankIncomeCounterRef.current;
+      setCount((prevCount) => prevCount + income);
+      setTotalIncome((prevTotalIncome) => prevTotalIncome + income);
+      setPassiveCounter((prevPassiveCounter) => prevPassiveCounter + income);
+    }, 2000);
+    setIntervalId(newIntervalId);
+  };
+
   useEffect(() => {
     if (shouldStartPassiveCounter) {
-      const newIntervalId = setInterval(() => {
-        const income = passiveBankIncomeCounterRef.current;
-        setCount((prevCount) => prevCount + income);
-        setTotalIncome((prevTotalIncome) => prevTotalIncome + income);
-        setPassiveCounter((prevPassiveCounter) => prevPassiveCounter + income);
-      }, 2000);
-      setIntervalId(newIntervalId);
+      startInterval();
     }
-  }, [shouldStartPassiveCounter]);
+  }, [shouldStartPassiveCounter, passiveBankIncomeCounter]);
 
   const passiveBankIncomeUpgrade = (onSuccess, onFailure) => {
     const reqCoins = calculateTotalCost(passiveBankUpgradeCost, passiveBankLevel, purchaceMultiplierState);
@@ -48,10 +55,6 @@ export const PassiveBankIncomeUpgrade = (count, setCount, setTotalIncome, setTot
       setPassiveBankLevel((prevLevel) => prevLevel + purchaceMultiplierState);
       setTotalMoneySpent((prevTotalMoneySpent) => prevTotalMoneySpent + reqCoins);
       upgradeSoundEffect();
-
-      if (intervalId) {
-        clearInterval(intervalId);
-      }
       
       setShouldStartPassiveCounter(true);
 
