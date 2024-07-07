@@ -17,39 +17,49 @@ const BankDepositComponent = ({ image, upgradeLevel }) => {
   const rejectSoundEffect = usePurchaceRejectSound();
 
   const handleDeposit = () => {
-    
-    if (depositAmount < 20 && depositAmount === 0) {
-      rejectSoundEffect();
-      Swal.fire("Invalid Deposit Amount", "Minimum deposit amount is $20.", "error");
-      return;
+    switch (true) {
+      case activeDeposits.length > 0:
+        rejectSoundEffect();
+        Swal.fire("Active Deposit", "You already have an active deposit. Please wait until it matures before making a new one.", "error");
+        break;
+      case depositAmount < 20 && depositPeriod <= 0:
+        rejectSoundEffect();
+        Swal.fire("Invalid Deposit Amount and Period", "Minimum deposit amount is $20 and minimum deposit period is 1 month.", "error");
+        break;
+      case depositAmount <= 0:
+        rejectSoundEffect();
+        Swal.fire("Invalid Deposit Amount", "Deposit amount must be greater than $0.", "error");
+        break;
+      case depositAmount < 20:
+        rejectSoundEffect();
+        Swal.fire("Invalid Deposit Amount", "Minimum deposit amount is $20.", "error");
+        break;
+      case depositPeriod < 1:
+        rejectSoundEffect();
+        Swal.fire("Invalid Deposit Period", "Minimum deposit period is 1 month.", "error");
+        break;
+      case depositAmount > count:
+        rejectSoundEffect();
+        Swal.fire("Not enough money", "You do not have enough money for this deposit.", "error");
+        break;
+
+      default:
+        upgradeSoundEffect();
+        setCount(count - depositAmount);
+        const endDepositDate = new Date(currentDate);
+        endDepositDate.setMonth(endDepositDate.getMonth() + depositPeriod);
+
+        const newDeposit = {
+          amount: depositAmount,
+          period: depositPeriod,
+          endDate: endDepositDate,
+        };
+
+        setActiveDeposits([newDeposit]);
+        setDepositAmount(0);
+        setDepositPeriod(1);
+        break;
     }
-
-    if (depositAmount >= 20 && depositAmount > count) {
-      rejectSoundEffect();
-      Swal.fire("Not enough money", "You do not have enough money for this deposit.", "error");
-      return;
-    }
-
-    if (depositAmount > count) {
-      rejectSoundEffect();
-      Swal.fire("Not enough money", "You do not have enough money for this deposit.", "error");
-      return;
-    }
-
-    upgradeSoundEffect();
-    setCount(count - depositAmount);
-    const endDepositDate = new Date(currentDate);
-    endDepositDate.setMonth(endDepositDate.getMonth() + depositPeriod);
-
-    const newDeposit = {
-      amount: depositAmount,
-      period: depositPeriod,
-      endDate: endDepositDate,
-    };
-
-    setActiveDeposits([...activeDeposits, newDeposit]);
-    setDepositAmount(0);
-    setDepositPeriod(0);
   };
 
   useEffect(() => {
@@ -59,9 +69,9 @@ const BankDepositComponent = ({ image, upgradeLevel }) => {
       const remainingDeposits = activeDeposits.filter(deposit => now < new Date(deposit.endDate));
 
       maturedDeposits.forEach(deposit => {
-        const interest = deposit.amount * 0.05 * deposit.period;
+        const interest = Math.round(deposit.amount * 0.05 * deposit.period);
         setCount(prevCount => prevCount + deposit.amount + interest);
-        Swal.fire("Deposit Completed", `Your deposit has matured. You earned $${interest.toFixed(0)} in interest.`, "success");
+        Swal.fire("Deposit Completed", `Your deposit has matured. You earned $${interest} in interest.`, "success");
       });
 
       setActiveDeposits(remainingDeposits);
@@ -86,7 +96,7 @@ const BankDepositComponent = ({ image, upgradeLevel }) => {
                 type="number"
                 placeholder="Amount"
                 value={depositAmount}
-                onChange={(e) => setDepositAmount(Number(e.target.value))}
+                onChange={(e) => setDepositAmount(Math.floor(Number(e.target.value)))}
               />
             </div>
             <div>
@@ -95,11 +105,11 @@ const BankDepositComponent = ({ image, upgradeLevel }) => {
                 type="number"
                 placeholder="Months"
                 value={depositPeriod}
-                onChange={(e) => setDepositPeriod(Number(e.target.value))}
+                onChange={(e) => setDepositPeriod(Math.floor(Number(e.target.value)))}
               />
             </div>
           </div>
-          <button className="click-upgrade-button" onClick={handleDeposit} disabled={depositAmount === 0 || depositPeriod === 0}>
+          <button className="click-upgrade-button" onClick={handleDeposit}>
             Deposit
           </button>
         </div>
