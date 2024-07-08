@@ -7,6 +7,8 @@
 - stop zwrotu ulepszenia/e
 - golden billet progress bar timing isnt synchronous with count increase after few upgrade purchaces
 - check if the bank deposit adds to passive income chart
+- dodac mozliwosc wpisania custom amount do raffla
+- zmienic ceny, aby byly bardziej realne
 
 # Done
 
