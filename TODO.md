@@ -4,7 +4,6 @@
 - create new upgrade button for click power upgrades
 - fix: coin multi buy calculation gives different output than buying multiple ugpgrades by single click
 - clean code
-- stop zwrotu ulepszenia/e
 - golden billet progress bar timing isnt synchronous with count increase after few upgrade purchaces
 - check if the bank deposit adds to passive income chart (?)
 - dodac mozliwosc wpisania custom amount do raffla
