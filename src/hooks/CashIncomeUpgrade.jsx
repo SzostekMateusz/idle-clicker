@@ -10,7 +10,7 @@ export const CashIncomeUpgrade = (count, setCount, setTotalMoneySpent, purchaceM
 
   const [cashIncome, setCashIncome] = useState(0);
   const [cashUpgradeLevel, setCashUpgradeLevel] = useState(0);
-  const [cashUpgradeCost, setCashUpgradeCost] = useState(2);
+  const [cashUpgradeCost, setCashUpgradeCost] = useState(750);
   const [firstPurchaseAlertShown, setFirstPurchaseAlertShown] = useState(false);
 
   const cashUpgrade = () => {

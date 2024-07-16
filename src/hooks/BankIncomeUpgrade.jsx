@@ -11,7 +11,7 @@ export const PassiveBankIncomeUpgrade = (count, setCount, setTotalIncome, setTot
   const [intervalId, setIntervalId] = useState(null);
   const [passiveBankIncomeCounter, setPassiveBankIncomeCounter] = useState(0);
   const [passiveBankLevel, setPassiveBankLevel] = useState(0);
-  const [passiveBankUpgradeCost, setPassiveBankUpgradeCost] = useState(2);
+  const [passiveBankUpgradeCost, setPassiveBankUpgradeCost] = useState(20000);
   const [shouldStartPassiveCounter, setShouldStartPassiveCounter] = useState(false);
   const [firstPurchaseAlertShown, setFirstPurchaseAlertShown] = useState(false);
 

@@ -21,7 +21,7 @@ export const useMouseClickingUpgrade = (
   const [clicked, setClicked] = useState(false);
   const [multiplier, setMultiplier] = useState(1);
   const [addOneLevel, setAddOneLevel] = useState(0);
-  const [addOneUpgradeCost, setAddOneUpgradeCost] = useState(2);
+  const [addOneUpgradeCost, setAddOneUpgradeCost] = useState(5);
   const [firstPurchaseAlertShown, setFirstPurchaseAlertShown] = useState(false);
 
   const handleClick = () => {
