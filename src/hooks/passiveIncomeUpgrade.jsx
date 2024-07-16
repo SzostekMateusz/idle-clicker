@@ -29,23 +29,30 @@ export const usePassiveIncomeUpgrade = (count, setCount, setTotalIncome, setTota
     };
   }, [intervalId]);
 
+  const startInterval = () => {
+    if (intervalId) {
+      clearInterval(intervalId);
+    }
+    const newIntervalId = setInterval(() => {
+      const income = passiveIncomeCounterRef.current;
+      setCount((prevCount) => prevCount + income);
+      setTotalIncome((prevTotalIncome) => prevTotalIncome + income);
+      setPassiveCounter((prevPassiveCounter) => prevPassiveCounter + income);
+    }, 2000);
+    setIntervalId(newIntervalId);
+  };
+
   useEffect(() => {
     if (shouldStartPassiveCounter) {
-      const newIntervalId = setInterval(() => {
-        const income = passiveIncomeCounterRef.current;
-        setCount((prevCount) => prevCount + income);
-        setTotalIncome((prevTotalIncome) => prevTotalIncome + income);
-        setPassiveCounter((prevPassiveCounter) => prevPassiveCounter + income);
-      }, 2000);
-      setIntervalId(newIntervalId);
+      startInterval();
     }
-  }, [shouldStartPassiveCounter]);
+  }, [shouldStartPassiveCounter, passiveIncomeCounter]);
 
   const passiveIncomeUpgrade = (onSuccess) => {
     const reqCoins = calculateTotalCost(passiveIncomeUpgradeCost, passiveIncomeLevel, purchaceMultiplierState);
     if (count >= reqCoins) {
       setCount((prevCount) => prevCount - reqCoins);
-      setPassiveIncomeCounter((prevCounter) => prevCounter + 2 * purchaceMultiplierState);
+      setPassiveIncomeCounter((prevCounter) => prevCounter + 5 * purchaceMultiplierState);
       setPassiveIncomeUpgradeCost((prevCost) => prevCost * 2);
       setPassiveIncomeLevel((prevLevel) => prevLevel + purchaceMultiplierState);
       setTotalMoneySpent((prevTotalMoneySpent) => prevTotalMoneySpent + reqCoins);
