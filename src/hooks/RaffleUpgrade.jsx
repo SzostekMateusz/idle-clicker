@@ -9,7 +9,7 @@ const RaffleUpgrade = (count, setCount) => {
 
   const [raffleWins, setRaffleWins] = useState(0);
   const [raffleLoses, setRaffleLoses] = useState(0);
-  const [firstPurchaseAlertShown, setFirstPurchaseAlertShown] = useState(false); // Flaga do sprawdzenia pierwszego użycia
+  const [firstPurchaseAlertShown, setFirstPurchaseAlertShown] = useState(false);
 
   const raffle = (raffleAmount) => {
     if (raffleAmount <= 0) {
@@ -23,7 +23,7 @@ const RaffleUpgrade = (count, setCount) => {
     }
 
     if (count >= raffleAmount) {
-      // Wyświetlenie ostrzeżenia przy pierwszym użyciu, jeśli zakup się uda
+      
       if (!firstPurchaseAlertShown) {
         Swal.fire({
           icon: 'info',
@@ -31,8 +31,8 @@ const RaffleUpgrade = (count, setCount) => {
           text: 'Remember, gambling can be addictive. Play responsibly.',
           confirmButtonText: 'OK'
         }).then(() => {
-          setFirstPurchaseAlertShown(true); // Ustawienie flagi, aby nie pokazywać komunikatu ponownie
-          proceedWithRaffle(raffleAmount); // Kontynuowanie po wyświetleniu alertu
+          setFirstPurchaseAlertShown(true);
+          proceedWithRaffle(raffleAmount);
         });
       } else {
         proceedWithRaffle(raffleAmount);
@@ -53,7 +53,7 @@ const RaffleUpgrade = (count, setCount) => {
     upgradeSoundEffect();
 
     if (rafflePool === 0) {
-      setCount((prevCount) => prevCount + raffleAmount);  // Pomnożenie kwoty w przypadku wygranej
+      setCount((prevCount) => prevCount + raffleAmount);
       setRaffleWins((prevWins) => prevWins + 1);
       Swal.fire({
         icon: 'success',
@@ -62,7 +62,7 @@ const RaffleUpgrade = (count, setCount) => {
         confirmButtonText: 'OK'
       });
     } else {
-      setCount((prevCount) => prevCount - raffleAmount);  // Odjęcie kwoty w przypadku przegranej
+      setCount((prevCount) => prevCount - raffleAmount);
       setRaffleLoses((prevLoses) => prevLoses + 1);
       Swal.fire({
         icon: 'error',
