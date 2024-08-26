@@ -1,13 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import "./clickupgradebox.css";
 import images from "../../imageImport.js";
 import Swal from "sweetalert2";
 
-const RaffleUpgradeBox = ({ title, upgradePrice, image, onClick, upgradeLevel, raffleWins, raffleLoses }) => {
+const RaffleUpgradeBox = ({ title, image, onClick, upgradeLevel, raffleWins, raffleLoses }) => {
+  const [raffleAmount, setRaffleAmount] = useState(0); // Nowe pole do wpisania kwoty
   const selectedImage = images[image];
 
   const handleUpgradeClick = () => {
-    onClick();
+    if (raffleAmount > 0) {
+      onClick(raffleAmount); // Przekazuje kwotę do funkcji onClick
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: 'Invalid Amount',
+        text: 'Please enter a valid amount to enter the raffle.',
+        confirmButtonText: 'OK'
+      });
+    }
   };
 
   return (
@@ -19,11 +29,16 @@ const RaffleUpgradeBox = ({ title, upgradePrice, image, onClick, upgradeLevel, r
       <div className="click-upgrade-box-right">
         <div className="click-upgrade-title">{title}</div>
         <div className="click-cont-smt">
-          <div className="clicks-per-upgrade">
-            Wins: {raffleWins} / Losses: {raffleLoses}
+          <div className="raffle-input">
+            <input
+              type="number"
+              placeholder="Enter amount"
+              value={raffleAmount}
+              onChange={(e) => setRaffleAmount(Math.floor(Number(e.target.value)))}
+            />
           </div>
           <button className="click-upgrade-button" onClick={handleUpgradeClick}>
-            Upgrade {upgradePrice}$
+            Enter Raffle
           </button>
         </div>
       </div>
