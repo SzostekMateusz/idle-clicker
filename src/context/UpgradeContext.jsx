@@ -88,13 +88,13 @@ export const UpgradeProvider = ({ children }) => {
   } = BitcoinIncomeUpgrade(count, setCount, setTotalMoneySpent, purchaceMultiplierState, increaseValue);
 
   const playVictorySound = useVictorySound();
-  const alertShownRef = useRef(false); // Ref do śledzenia, czy alert został już pokazany
+  const alertShownRef = useRef(false);
 
-  const [confettiTrigger, setConfettiTrigger] = useState(false); // Stan do zarządzania konfetti
+  const [confettiTrigger, setConfettiTrigger] = useState(false);
 
   useEffect(() => {
     if (count >= 50 && !alertShownRef.current) {
-      alertShownRef.current = true; // Ustawienie ref na true, aby upewnić się, że alert jest wyświetlany tylko raz
+      alertShownRef.current = true; 
       playVictorySound();
       setConfettiTrigger(true);
       Swal.fire({
@@ -122,8 +122,8 @@ export const UpgradeProvider = ({ children }) => {
             allowEscapeKey: false
           });
           setCount(0);
-          alertShownRef.current = false; // Reset ref po restarcie
-          //moze reload strony, zeby wszystko zresetowac? 
+          alertShownRef.current = false;
+          location.reload();
         }
       });
     }

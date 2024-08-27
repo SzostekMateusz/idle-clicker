@@ -4,12 +4,12 @@ import images from "../../imageImport.js";
 import Swal from "sweetalert2";
 
 const RaffleUpgradeBox = ({ title, image, onClick, upgradeLevel, raffleWins, raffleLoses }) => {
-  const [raffleAmount, setRaffleAmount] = useState(0); // Nowe pole do wpisania kwoty
+  const [raffleAmount, setRaffleAmount] = useState(0);
   const selectedImage = images[image];
 
   const handleUpgradeClick = () => {
     if (raffleAmount > 0) {
-      onClick(raffleAmount); // Przekazuje kwotę do funkcji onClick
+      onClick(raffleAmount);
     } else {
       Swal.fire({
         icon: 'error',
