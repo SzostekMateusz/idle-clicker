@@ -32,7 +32,6 @@ const RaffleUpgradeBox = ({ title, image, onClick, upgradeLevel, raffleWins, raf
           <div className="raffle-input">
             <input
               type="number"
-              placeholder="Enter amount"
               value={raffleAmount}
               onChange={(e) => setRaffleAmount(Math.floor(Number(e.target.value)))}
             />

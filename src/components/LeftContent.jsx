@@ -89,7 +89,6 @@ const LeftContent = ({ currentDate }) => {
         return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
 
-    //Game instruction alert
     const showInstruction = () => {
         Swal.fire({
             title: "How to play?",

@@ -117,12 +117,9 @@ const RightContent = () => {
         />
         <RaffleUpgradeBox
           title="Raffle"
-          upgradePrice={formatNumber(raffleCost)}
           image="raffle"
           onClick={raffle}
           upgradeLevel="-"
-          raffleWins={raffleWins}
-          raffleLoses={raffleLoses}
         />
         <BankDepositComponent 
           image="bank"
