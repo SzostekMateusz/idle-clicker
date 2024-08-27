@@ -67,18 +67,18 @@ const BankDepositComponent = ({ image, upgradeLevel }) => {
       const now = new Date(currentDate);
       const maturedDeposits = activeDeposits.filter(deposit => now >= new Date(deposit.endDate));
       const remainingDeposits = activeDeposits.filter(deposit => now < new Date(deposit.endDate));
-
+  
       maturedDeposits.forEach(deposit => {
         const interest = Math.round(deposit.amount * 0.05 * deposit.period);
         setCount(prevCount => prevCount + deposit.amount + interest);
         Swal.fire("Deposit Completed", `Your deposit has matured. You earned $${interest} in interest.`, "success");
       });
-
+  
       setActiveDeposits(remainingDeposits);
     };
-
+  
     handleMaturedDeposits();
-  }, [currentDate, activeDeposits, setCount]);
+  }, [currentDate, setCount]);
 
   return (
     <div className="click-upgrade-box-container">
